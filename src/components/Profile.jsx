@@ -1,7 +1,9 @@
+import classes from './Profile.module.css';
+
 const Profile = () => {
   return (
-    <div className="App-content">
-      <div className="banner">
+    <div className={classes.content}>
+      <div className={classes.banner}>
         <img
           src="https://images.pexels.com/photos/248797/pexels-photo-248797.jpeg?auto=compress&cs=tinysrgb&h=350"
           alt="Nature"
@@ -13,8 +15,8 @@ const Profile = () => {
         <div>New post</div>
       </div>
       <div>
-        <div>post 1</div>
-        <div>post 2</div>
+        <div className={classes.item}>post 1</div>
+        <div className={classes.item}>post 2</div>
       </div>
     </div>
   );

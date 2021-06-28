@@ -1,9 +1,10 @@
-import logo from "../logo.svg";
+import logo from '../logo.svg';
+import classes from './Header.module.css';
 
 const Header = () => {
   return (
-    <header className="App-header">
-      <img src={logo} className="App-logo" alt="logo" />
+    <header className={classes.header}>
+      <img src={logo} alt="logo" />
     </header>
   );
 }

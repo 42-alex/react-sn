@@ -7,27 +7,3 @@
   "app_header app_header"
   "app_nav app_content";
 }
-
-.App-header {
-  grid-area: app_header;
-  background-color: limegreen;
-}
-
-.App-nav {
-  grid-area: app_nav;
-  background-color: #cd7032;
-}
-
-.App-content {
-  grid-area: app_content;
-  background-color: #229dab;
-}
-
-.App-header img {
-  width: 80px;
-}
-
-.banner img {
-  width: 100%;
-  height: 200px;
-}
