@@ -1,4 +1,4 @@
-.App {
+.app-wrapper {
   display: grid;
   grid-template-rows: 60px 1fr;
   grid-template-columns: 2fr 10fr;
@@ -6,4 +6,10 @@
   grid-template-areas:
   "app_header app_header"
   "app_nav app_content";
+  height: 100%;
+}
+
+.app-wrapper-content {
+  grid-area: app_content;
+  background-color: cornflowerblue;
 }
