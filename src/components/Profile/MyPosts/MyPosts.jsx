@@ -6,7 +6,7 @@ const MyPosts = () => {
       <div>
         my posts
         <div>
-          <textarea name="new_post" id="new_post" cols="30" rows="5"></textarea>
+          <textarea name="new_post" id="new_post" cols="30" rows="5" />
           <input type="button" value="Add new post" />
         </div>
       </div>
