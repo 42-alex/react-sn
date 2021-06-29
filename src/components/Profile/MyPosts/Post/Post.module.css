@@ -1,0 +1,16 @@
+.item {
+    display: flex;
+    align-items: center;
+    color: greenyellow;
+}
+
+.item img {
+    border-radius: 50%;
+    width: 30px;
+}
+
+.likes img {
+    width: 15px;
+    border-radius: 50%;
+    cursor: pointer;
+}
