@@ -1,16 +1,11 @@
-import classes from './Profile.module.css';
+import ProfileInfo from './ProfileInfo/ProfileInfo';
 import MyPosts from "./MyPosts/MyPosts";
+import classes from './Profile.module.css';
 
 const Profile = () => {
   return (
-    <div>
-      <div className={classes.banner}>
-        <img
-          src="https://images.pexels.com/photos/248797/pexels-photo-248797.jpeg?auto=compress&cs=tinysrgb&h=350"
-          alt="Nature"
-        />
-      </div>
-      <div>ava + descrption</div>
+    <div className={classes.profileWrapper}>
+      <ProfileInfo />
       <MyPosts />
     </div>
   );
