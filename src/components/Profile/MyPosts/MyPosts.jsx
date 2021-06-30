@@ -1,6 +1,12 @@
 import Post from "./Post/Post";
 
 const MyPosts = () => {
+  const posts = [
+    { id: 1, text: 'Are you ready?', likesCount: 4 },
+    { id: 2, text: 'Go straight forward, please', likesCount: 2 },
+    { id: 3, text: 'Where is the bathroom?', likesCount: 0 },
+  ];
+
   return (
     <>
       <div>
@@ -11,8 +17,7 @@ const MyPosts = () => {
         </div>
       </div>
       <div>
-        <Post text='post 1' likesCount={4} />
-        <Post text='post 2' likesCount={1} />
+        { posts.map(el => <Post key={el.id} text={el.text} likesCount={el.likesCount} />) }
       </div>
     </>
   )
