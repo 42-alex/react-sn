@@ -3,20 +3,20 @@ import Message from './Message/Message';
 import classes from './Dialogs.module.css';
 
 const Dialogs = (props) => {
+  const dialogsElements = props.state.dialogs.map(el =>
+    <DialogItem key={el.id} id={el.id} name={el.name} />
+  );
+  const messagesElements = props.state.messages.map(el =>
+    <Message key={el.id} message={el.message} />
+  )
 
   return (
     <div className={classes.dialogs}>
       <div className={classes.dialogsItems}>
-        { props.state.dialogs.map(el =>
-          <DialogItem key={el.id} id={el.id} name={el.name} />
-          )
-        }
+        { dialogsElements }
       </div>
       <div className={classes.messages}>
-        { props.state.messages.map(el =>
-          <Message key={el.id} message={el.message} />
-          )
-        }
+        { messagesElements }
       </div>
     </div>
   );

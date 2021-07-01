@@ -1,6 +1,9 @@
 import Post from "./Post/Post";
 
 const MyPosts = ({ posts }) => {
+  const postsElements = posts.map(el =>
+    <Post key={el.id} text={el.text} likesCount={el.likesCount} />
+  );
 
   return (
     <>
@@ -12,7 +15,7 @@ const MyPosts = ({ posts }) => {
         </div>
       </div>
       <div>
-        { posts.map(el => <Post key={el.id} text={el.text} likesCount={el.likesCount} />) }
+        { postsElements }
       </div>
     </>
   )
