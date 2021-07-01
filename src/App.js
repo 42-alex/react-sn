@@ -24,7 +24,7 @@ function App(props) {
               <Profile posts={props.posts} />
             </Route>
             <Route path='/messages'>
-              <Dialogs />
+              <Dialogs dialogs={props.dialogs} messages={props.messages} />
             </Route>
             <Route path='/news'>
               <News />

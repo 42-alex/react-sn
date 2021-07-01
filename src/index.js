@@ -11,9 +11,22 @@ const posts = [
   { id: 3, text: 'Where is the bathroom?', likesCount: 0 },
 ];
 
+const dialogs = [
+  { id: 1, name: 'Oliver' },
+  { id: 2, name: 'Neil' },
+  { id: 3, name: 'Stewart' },
+  { id: 4, name: 'Sonya' },
+];
+const messages = [
+  { id: 1, message: 'Message 1' },
+  { id: 2, message: 'How are you?' },
+  { id: 3, message: 'What is the capital of Great Britain?' },
+];
+
+
 ReactDOM.render(
   <React.StrictMode>
-    <App posts={posts} />
+    <App posts={posts} dialogs={dialogs} messages={messages} />
   </React.StrictMode>,
   document.getElementById('root')
 );
