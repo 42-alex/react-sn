@@ -1,3 +1,5 @@
+import render from '../render';
+
 let state = {
   profilePage: {
     posts: [
@@ -28,6 +30,7 @@ const addPost = (text) => {
     likesCount: 0
   }
   state.profilePage.posts.unshift(newPost);
+  render(state, addPost);
 }
 
 export {
