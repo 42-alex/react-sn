@@ -22,7 +22,11 @@ function App(props) {
         <div className='app-wrapper-content'>
           <Switch>
             <Route path='/profile'>
-              <Profile state={props.state.profilePage} addPost={props.addPost} />
+              <Profile
+                state={props.state.profilePage}
+                addPost={props.addPost}
+                updatePostInput={props.updatePostInput}
+              />
             </Route>
             <Route path='/messages'>
               <Dialogs state={props.state.dialogsPage} />

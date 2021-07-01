@@ -7,6 +7,7 @@ let state = {
       { id: 2, text: 'Go straight forward, please', likesCount: 2 },
       { id: 3, text: 'Where is the bathroom?', likesCount: 0 },
     ],
+    newPostText: '',
   },
   dialogsPage: {
     dialogs: [
@@ -30,11 +31,19 @@ const addPost = (text) => {
     likesCount: 0
   }
   state.profilePage.posts.unshift(newPost);
-  render(state, addPost);
+  state.profilePage.newPostText = '';
+  render(state);
 }
+
+const updatePostInput = (text) => {
+  state.profilePage.newPostText = text;
+  render(state);
+}
+
 
 export {
   state as default,
   addPost,
+  updatePostInput,
 }
 

@@ -1,5 +1,5 @@
 import renderEntireApp from './render';
-import state, { addPost } from './redux/state';
+import state from './redux/state';
 import './index.css';
 
-renderEntireApp(state, addPost);
+renderEntireApp(state);
