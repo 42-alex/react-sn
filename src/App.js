@@ -21,10 +21,10 @@ function App(props) {
         <div className='app-wrapper-content'>
           <Switch>
             <Route path='/profile'>
-              <Profile posts={props.posts} />
+              <Profile state={props.state.profilePage} />
             </Route>
             <Route path='/messages'>
-              <Dialogs dialogs={props.dialogs} messages={props.messages} />
+              <Dialogs state={props.state.dialogsPage} />
             </Route>
             <Route path='/news'>
               <News />
@@ -36,7 +36,7 @@ function App(props) {
               <Settings />
             </Route>
             <Route path='/'>
-              <Profile />
+              <Profile state={props.state.profilePage} />
             </Route>
           </Switch>
         </div>
