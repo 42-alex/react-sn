@@ -13,6 +13,7 @@ import Settings from './components/Settings/Settings';
 import './App.css';
 
 function App(props) {
+
   return (
     <Router>
       <div className='app-wrapper'>
@@ -21,7 +22,7 @@ function App(props) {
         <div className='app-wrapper-content'>
           <Switch>
             <Route path='/profile'>
-              <Profile state={props.state.profilePage} />
+              <Profile state={props.state.profilePage} addPost={props.addPost} />
             </Route>
             <Route path='/messages'>
               <Dialogs state={props.state.dialogsPage} />

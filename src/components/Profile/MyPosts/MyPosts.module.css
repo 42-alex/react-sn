@@ -1,0 +1,7 @@
+.postForm {
+    margin-bottom: 15px;
+}
+
+.postForm textarea {
+    display: block;
+}

@@ -21,4 +21,17 @@ let state = {
   },
 }
 
-export default state;
+const addPost = (text) => {
+  const newPost = {
+    id: 1,
+    text: text,
+    likesCount: 0
+  }
+  state.profilePage.posts.unshift(newPost);
+}
+
+export {
+  state as default,
+  addPost,
+}
+
