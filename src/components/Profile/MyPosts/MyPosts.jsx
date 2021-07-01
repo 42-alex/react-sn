@@ -1,11 +1,6 @@
 import Post from "./Post/Post";
 
-const MyPosts = () => {
-  const posts = [
-    { id: 1, text: 'Are you ready?', likesCount: 4 },
-    { id: 2, text: 'Go straight forward, please', likesCount: 2 },
-    { id: 3, text: 'Where is the bathroom?', likesCount: 0 },
-  ];
+const MyPosts = ({ posts }) => {
 
   return (
     <>

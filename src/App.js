@@ -12,7 +12,7 @@ import Music from "./components/Music/Music";
 import Settings from './components/Settings/Settings';
 import './App.css';
 
-function App() {
+function App(props) {
   return (
     <Router>
       <div className='app-wrapper'>
@@ -21,7 +21,7 @@ function App() {
         <div className='app-wrapper-content'>
           <Switch>
             <Route path='/profile'>
-              <Profile />
+              <Profile posts={props.posts} />
             </Route>
             <Route path='/messages'>
               <Dialogs />
