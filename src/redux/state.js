@@ -1,5 +1,3 @@
-import render from '../render';
-
 let state = {
   profilePage: {
     posts: [
@@ -24,6 +22,10 @@ let state = {
   },
 }
 
+let renderEntireApp = () => {
+  console.log('renderEntireApp() fired from state.js');
+}
+
 const addPost = (text) => {
   const newPost = {
     id: 1,
@@ -32,12 +34,16 @@ const addPost = (text) => {
   }
   state.profilePage.posts.unshift(newPost);
   state.profilePage.newPostText = '';
-  render(state);
+  renderEntireApp(state);
 }
 
 const updatePostInput = (text) => {
   state.profilePage.newPostText = text;
-  render(state);
+  renderEntireApp(state);
+}
+
+const subscribe = (observer) => {
+  renderEntireApp = observer;
 }
 
 
@@ -45,5 +51,5 @@ export {
   state as default,
   addPost,
   updatePostInput,
+  subscribe,
 }
-
