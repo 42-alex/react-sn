@@ -1,3 +1,6 @@
+const ADD_POST = 'ADD_POST';
+const UPDATE_POST_INPUT = 'UPDATE_POST_INPUT';
+
 const store = {
   _state: {
     profilePage: {
@@ -26,7 +29,7 @@ const store = {
     return this._state;
   },
   dispatch (action){
-    if (action.type === 'ADD_POST') {
+    if (action.type === ADD_POST) {
       const newPost = {
         id: 1,
         text: this._state.profilePage.newPostText,
@@ -36,7 +39,7 @@ const store = {
       this._state.profilePage.newPostText = '';
       this._callSubscriber(this);
     }
-    else if (action.type === 'UPDATE_POST_INPUT') {
+    else if (action.type === UPDATE_POST_INPUT) {
       this._state.profilePage.newPostText = action.text;
       this._callSubscriber(this);
     }
@@ -49,9 +52,9 @@ const store = {
   },
 }
 
-export const addPostActionCreator = () => ({ type: 'ADD_POST' });
+export const addPostActionCreator = () => ({ type: ADD_POST });
 export const updatePostInputActionCreator = (text) => ({
-  type: 'UPDATE_POST_INPUT',
+  type: UPDATE_POST_INPUT,
   text: text,
 })
 
