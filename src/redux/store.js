@@ -25,19 +25,21 @@ const store = {
   getState() {
     return this._state;
   },
-  addPost (text) {
-    const newPost = {
-      id: 1,
-      text: text,
-      likesCount: 0
+  dispatch (action){
+    if (action.type === 'ADD_POST') {
+      const newPost = {
+        id: 1,
+        text: this._state.profilePage.newPostText,
+        likesCount: 0
+      }
+      this._state.profilePage.posts.unshift(newPost);
+      this._state.profilePage.newPostText = '';
+      this._callSubscriber(this);
     }
-    this._state.profilePage.posts.unshift(newPost);
-    this._state.profilePage.newPostText = '';
-    this._callSubscriber(this);
-  },
-  updatePostInput (text) {
-    this._state.profilePage.newPostText = text;
-    this._callSubscriber(this);
+    else if (action.type === 'UPDATE_POST_INPUT') {
+      this._state.profilePage.newPostText = action.text;
+      this._callSubscriber(this);
+    }
   },
   _callSubscriber() {
     console.log('no subscribers');

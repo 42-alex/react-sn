@@ -2,7 +2,7 @@ import React from 'react';
 import Post from "./Post/Post";
 import classes from './MyPosts.module.css';
 
-const MyPosts = ({ posts, newPostText, addPost, updatePostInput }) => {
+const MyPosts = ({ posts, newPostText, dispatch }) => {
 
   const textAreaRef = React.createRef();
   const postsElements = posts.map(el =>
@@ -10,12 +10,19 @@ const MyPosts = ({ posts, newPostText, addPost, updatePostInput }) => {
   );
 
   const onAddClick = () => {
-    addPost(textAreaRef.current.value);
+    const action = {
+      type: 'ADD_POST',
+    }
+    dispatch(action);
     textAreaRef.current.value = '';
   }
 
   const onPostTextChange = () => {
-    updatePostInput(textAreaRef.current.value);
+    const action = {
+      type: 'UPDATE_POST_INPUT',
+      text: textAreaRef.current.value,
+    }
+    dispatch(action);
   }
 
   return (

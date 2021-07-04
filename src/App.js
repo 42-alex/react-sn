@@ -23,11 +23,7 @@ function App(props) {
         <div className='app-wrapper-content'>
           <Switch>
             <Route path='/profile'>
-              <Profile
-                state={state.profilePage}
-                addPost={props.store.addPost.bind(props.store)}
-                updatePostInput={props.store.updatePostInput.bind(props.store)}
-              />
+              <Profile state={state.profilePage} dispatch={props.store.dispatch.bind(props.store)} />
             </Route>
             <Route path='/messages'>
               <Dialogs state={state.dialogsPage} />
@@ -42,7 +38,7 @@ function App(props) {
               <Settings />
             </Route>
             <Route path='/'>
-              <Profile state={state.profilePage} />
+              <Profile state={state.profilePage} dispatch={props.store.dispatch.bind(props.store)} />
             </Route>
           </Switch>
         </div>
