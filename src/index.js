@@ -1,18 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import state, { addPost, updatePostInput, subscribe } from './redux/state';
+import store from './redux/store';
 import App from './App';
 import './index.css';
 
-const renderEntireApp = (state) => {
+const renderEntireApp = (store) => {
   ReactDOM.render(
     <React.StrictMode>
-      <App state={state} addPost={addPost} updatePostInput={updatePostInput} />
+      <App store={store} />
     </React.StrictMode>,
     document.getElementById('root')
   );
 }
 
-renderEntireApp(state);
+renderEntireApp(store);
 
-subscribe(renderEntireApp);
+store.subscribe(renderEntireApp);

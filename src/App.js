@@ -13,6 +13,7 @@ import Settings from './components/Settings/Settings';
 import './App.css';
 
 function App(props) {
+  const state = props.store.getState();
 
   return (
     <Router>
@@ -23,13 +24,13 @@ function App(props) {
           <Switch>
             <Route path='/profile'>
               <Profile
-                state={props.state.profilePage}
-                addPost={props.addPost}
-                updatePostInput={props.updatePostInput}
+                state={state.profilePage}
+                addPost={props.store.addPost.bind(props.store)}
+                updatePostInput={props.store.updatePostInput.bind(props.store)}
               />
             </Route>
             <Route path='/messages'>
-              <Dialogs state={props.state.dialogsPage} />
+              <Dialogs state={state.dialogsPage} />
             </Route>
             <Route path='/news'>
               <News />
@@ -41,7 +42,7 @@ function App(props) {
               <Settings />
             </Route>
             <Route path='/'>
-              <Profile state={props.state.profilePage} />
+              <Profile state={state.profilePage} />
             </Route>
           </Switch>
         </div>
