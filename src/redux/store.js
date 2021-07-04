@@ -49,5 +49,11 @@ const store = {
   },
 }
 
+export const addPostActionCreator = () => ({ type: 'ADD_POST' });
+export const updatePostInputActionCreator = (text) => ({
+  type: 'UPDATE_POST_INPUT',
+  text: text,
+})
+
 
 export default store;

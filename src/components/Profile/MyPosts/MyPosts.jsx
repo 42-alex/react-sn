@@ -1,6 +1,7 @@
 import React from 'react';
 import Post from "./Post/Post";
 import classes from './MyPosts.module.css';
+import { addPostActionCreator, updatePostInputActionCreator } from '../../../redux/store';
 
 const MyPosts = ({ posts, newPostText, dispatch }) => {
 
@@ -10,18 +11,13 @@ const MyPosts = ({ posts, newPostText, dispatch }) => {
   );
 
   const onAddClick = () => {
-    const action = {
-      type: 'ADD_POST',
-    }
+    const action = addPostActionCreator();
     dispatch(action);
     textAreaRef.current.value = '';
   }
 
   const onPostTextChange = () => {
-    const action = {
-      type: 'UPDATE_POST_INPUT',
-      text: textAreaRef.current.value,
-    }
+    const action = updatePostInputActionCreator(textAreaRef.current.value);
     dispatch(action);
   }
 
