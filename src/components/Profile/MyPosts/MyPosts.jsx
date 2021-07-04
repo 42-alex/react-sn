@@ -2,7 +2,7 @@ import React from 'react';
 import Post from "./Post/Post";
 import classes from './MyPosts.module.css';
 
-const MyPosts = ({ posts, addPost, updatePostInput }) => {
+const MyPosts = ({ posts, newPostText, addPost, updatePostInput }) => {
 
   const textAreaRef = React.createRef();
   const postsElements = posts.map(el =>
@@ -23,7 +23,7 @@ const MyPosts = ({ posts, addPost, updatePostInput }) => {
       <div className={classes.postForm}>
         my posts
         <div>
-          <textarea ref={textAreaRef} name="new_post" cols="30" rows="5" onChange={onPostTextChange} />
+          <textarea ref={textAreaRef} value={newPostText} cols="30" rows="5" onChange={onPostTextChange} />
           <input type="button" value="Add new post" onClick={onAddClick} />
         </div>
       </div>
