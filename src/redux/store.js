@@ -1,5 +1,7 @@
 const ADD_POST = 'ADD_POST';
 const UPDATE_POST_INPUT = 'UPDATE_POST_INPUT';
+const ADD_MESSAGE = 'ADD_MESSAGE';
+const UPDATE_MESSAGE_INPUT = 'UPDATE_MESSAGE_INPUT';
 
 const store = {
   _state: {
@@ -23,6 +25,7 @@ const store = {
         { id: 2, message: 'How are you?' },
         { id: 3, message: 'What is the capital of Great Britain?' },
       ],
+      newMessageText: '',
     },
   },
   getState() {
@@ -43,6 +46,19 @@ const store = {
       this._state.profilePage.newPostText = action.text;
       this._callSubscriber(this);
     }
+    else if (action.type === ADD_MESSAGE) {
+      const newMessage = {
+        id: 1,
+        message: this._state.dialogsPage.newMessageText,
+      }
+      this._state.dialogsPage.messages.unshift(newMessage);
+      this._state.dialogsPage.newMessageText = '';
+      this._callSubscriber(this);
+    }
+    else if (action.type === UPDATE_MESSAGE_INPUT) {
+      this._state.dialogsPage.newMessageText = action.messageText;
+      this._callSubscriber(this);
+    }
   },
   _callSubscriber() {
     console.log('no subscribers');
@@ -56,6 +72,11 @@ export const addPostActionCreator = () => ({ type: ADD_POST });
 export const updatePostInputActionCreator = (text) => ({
   type: UPDATE_POST_INPUT,
   text: text,
+})
+export const addMessageActionCreator = () => ({ type: ADD_MESSAGE });
+export const updateMessageInputActionCreator = (messageText) => ({
+  type: UPDATE_MESSAGE_INPUT,
+  messageText: messageText,
 })
 
 

@@ -26,7 +26,7 @@ function App(props) {
               <Profile state={state.profilePage} dispatch={props.store.dispatch.bind(props.store)} />
             </Route>
             <Route path='/messages'>
-              <Dialogs state={state.dialogsPage} />
+              <Dialogs state={state.dialogsPage} dispatch={props.store.dispatch.bind(props.store)} />
             </Route>
             <Route path='/news'>
               <News />
