@@ -1,11 +1,9 @@
-import React from 'react';
 import Post from "./Post/Post";
 import classes from './MyPosts.module.css';
 import { addPostActionCreator, updatePostInputActionCreator } from '../../../redux/store';
 
 const MyPosts = ({ posts, newPostText, dispatch }) => {
 
-  const textAreaRef = React.createRef();
   const postsElements = posts.map(el =>
     <Post key={el.id} text={el.text} likesCount={el.likesCount} />
   );
@@ -13,11 +11,10 @@ const MyPosts = ({ posts, newPostText, dispatch }) => {
   const onAddClick = () => {
     const action = addPostActionCreator();
     dispatch(action);
-    textAreaRef.current.value = '';
   }
 
-  const onPostTextChange = () => {
-    const action = updatePostInputActionCreator(textAreaRef.current.value);
+  const onPostTextChange = (e) => {
+    const action = updatePostInputActionCreator(e.target.value)
     dispatch(action);
   }
 
@@ -26,7 +23,7 @@ const MyPosts = ({ posts, newPostText, dispatch }) => {
       <div className={classes.postForm}>
         my posts
         <div>
-          <textarea ref={textAreaRef} value={newPostText} cols="30" rows="5" onChange={onPostTextChange} />
+          <textarea value={newPostText} onChange={onPostTextChange} />
           <input type="button" value="Add new post" onClick={onAddClick} />
         </div>
       </div>
