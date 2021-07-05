@@ -1,6 +1,6 @@
 import Post from "./Post/Post";
 import classes from './MyPosts.module.css';
-import { addPostActionCreator, updatePostInputActionCreator } from '../../../redux/store';
+import { addPostActionCreator, updatePostInputActionCreator } from '../../../redux/reducers/profile-reducer';
 
 const MyPosts = ({ posts, newPostText, dispatch }) => {
 
