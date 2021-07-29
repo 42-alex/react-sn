@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import store from './redux/store';
+import store from './redux/store-redux';
 import App from './App';
 import './index.css';
 
-const renderEntireApp = (store) => {
+const renderEntireApp = () => {
   ReactDOM.render(
     <React.StrictMode>
       <App store={store} />
@@ -15,4 +15,8 @@ const renderEntireApp = (store) => {
 
 renderEntireApp(store);
 
-store.subscribe(renderEntireApp);
+store.subscribe(
+  () => {
+    renderEntireApp(store);
+  }
+);
