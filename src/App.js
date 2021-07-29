@@ -23,7 +23,7 @@ function App(props) {
         <div className='app-wrapper-content'>
           <Switch>
             <Route path='/profile'>
-              <Profile state={state.profilePage} dispatch={props.store.dispatch.bind(props.store)} />
+              <Profile store={props.store} />
             </Route>
             <Route path='/messages'>
               <Dialogs state={state.dialogsPage} dispatch={props.store.dispatch.bind(props.store)} />
@@ -38,7 +38,7 @@ function App(props) {
               <Settings />
             </Route>
             <Route path='/'>
-              <Profile state={state.profilePage} dispatch={props.store.dispatch.bind(props.store)} />
+              <Profile store={props.store} />
             </Route>
           </Switch>
         </div>
