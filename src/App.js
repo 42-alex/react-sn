@@ -6,14 +6,13 @@ import {
 import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
 import Profile from "./components/Profile/Profile";
-import Dialogs from "./components/Dialogs/Dialogs";
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from './components/Settings/Settings';
 import './App.css';
 
 function App(props) {
-  const state = props.store.getState();
 
   return (
     <Router>
@@ -26,7 +25,7 @@ function App(props) {
               <Profile store={props.store} />
             </Route>
             <Route path='/messages'>
-              <Dialogs state={state.dialogsPage} dispatch={props.store.dispatch.bind(props.store)} />
+              <DialogsContainer store={props.store} />
             </Route>
             <Route path='/news'>
               <News />
