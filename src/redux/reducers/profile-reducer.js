@@ -11,6 +11,9 @@ const initialState = {
 };
 
 const profileReducer = (state = initialState, action) => {
+  let newState = { ...state };
+  newState.posts = [ ...state.posts ];
+
   switch (action.type) {
     case ADD_POST:
       const newPost = {
@@ -18,16 +21,16 @@ const profileReducer = (state = initialState, action) => {
         text: state.newPostText,
         likesCount: 0
       }
-      state.posts.unshift(newPost);
-      state.newPostText = '';
-      return state;
+      newState.posts.unshift(newPost);
+      newState.newPostText = '';
+      return newState;
 
     case UPDATE_POST_INPUT:
-      state.newPostText = action.text;
-      return state;
+      newState.newPostText = action.text;
+      return newState;
 
     default:
-      return state;
+      return newState;
   }
 }
 
