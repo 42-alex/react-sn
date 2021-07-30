@@ -11,11 +11,11 @@ const initialState = {
 };
 
 const profileReducer = (state = initialState, action) => {
-  let newState = { ...state };
-  newState.posts = [ ...state.posts ];
 
   switch (action.type) {
-    case ADD_POST:
+    case ADD_POST: {
+      let newState = { ...state };
+      newState.posts = [ ...state.posts ];
       const newPost = {
         id: 1,
         text: state.newPostText,
@@ -24,13 +24,14 @@ const profileReducer = (state = initialState, action) => {
       newState.posts.unshift(newPost);
       newState.newPostText = '';
       return newState;
-
-    case UPDATE_POST_INPUT:
+    }
+    case UPDATE_POST_INPUT: {
+      let newState = { ...state };
       newState.newPostText = action.text;
       return newState;
-
+    }
     default:
-      return newState;
+      return state;
   }
 }
 
