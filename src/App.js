@@ -12,7 +12,7 @@ import Music from "./components/Music/Music";
 import Settings from './components/Settings/Settings';
 import './App.css';
 
-function App(props) {
+function App() {
 
   return (
     <Router>
@@ -22,10 +22,10 @@ function App(props) {
         <div className='app-wrapper-content'>
           <Switch>
             <Route path='/profile'>
-              <Profile store={props.store} />
+              <Profile />
             </Route>
             <Route path='/messages'>
-              <DialogsContainer store={props.store} />
+              <DialogsContainer />
             </Route>
             <Route path='/news'>
               <News />
@@ -37,7 +37,7 @@ function App(props) {
               <Settings />
             </Route>
             <Route path='/'>
-              <Profile store={props.store} />
+              <Profile />
             </Route>
           </Switch>
         </div>

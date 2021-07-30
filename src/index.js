@@ -3,20 +3,19 @@ import ReactDOM from 'react-dom';
 import store from './redux/store-redux';
 import App from './App';
 import './index.css';
+import { Provider } from 'react-redux';
 
 const renderEntireApp = () => {
   ReactDOM.render(
     <React.StrictMode>
-      <App store={store} />
+      <Provider store={store} >
+        <App />
+      </Provider>
     </React.StrictMode>,
     document.getElementById('root')
   );
 }
 
-renderEntireApp(store);
+renderEntireApp();
 
-store.subscribe(
-  () => {
-    renderEntireApp(store);
-  }
-);
+store.subscribe(renderEntireApp);
