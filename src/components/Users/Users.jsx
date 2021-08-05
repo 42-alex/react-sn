@@ -6,6 +6,7 @@ import {
   DEFAULT_USER_CONTRY,
   DEFAULT_USER_CITY,
 } from '../../const/settings';
+import Preloader from '../common/Preloader';
 
 const Users = (props) => {
   const { currentPage, usersOnPage, totalUsersCount } = props;
@@ -49,6 +50,7 @@ const Users = (props) => {
   );
 
   return <>
+    { props.isFetching && <Preloader /> }
     <div className={classes.pagination}>
         { pageItems }
     </div>
