@@ -2,3 +2,7 @@
     width: 100%;
     height: 200px;
 }
+
+.profileDescription img {
+    width: 100px;
+}

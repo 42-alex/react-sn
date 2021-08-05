@@ -1,6 +1,6 @@
 import classes from './ProfileInfo.module.css';
 
-const ProfileInfo = () => {
+const ProfileInfo = (props) => {
   return (
     <>
       <div className={classes.banner}>
@@ -9,9 +9,17 @@ const ProfileInfo = () => {
           alt="Nature"
         />
       </div>
-      <div>ava + description</div>
+      {props.userProfile &&
+        <div className={classes.profileDescription}>
+          <div>Full name: {props.userProfile.fullName}</div>
+          <div>About me: {props.userProfile.aboutMe}</div>
+          <div>
+            <img src={props.userProfile.photos.small} alt="Profile" />
+          </div>
+        </div>
+      }
     </>
   )
-}
+};
 
 export default ProfileInfo;
