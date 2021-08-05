@@ -6,16 +6,43 @@ import {
   DEFAULT_USER_STATUS,
   DEFAULT_USER_CONTRY,
   DEFAULT_USER_CITY,
-} from '../../const/const';
+} from '../../const/settings';
 
 class Users extends React.Component {
-  componentDidMount() {
+
+  onPageClick = (currentPage) => {
+    this.props.setCurrentPage(currentPage);
+    this.getUsers(currentPage);
+  }
+
+  getUsers = (currentPage = this.props.currentPage) => {
+    const usersOnPage= this.props.usersOnPage;
+
     axios
-      .get('https://social-network.samuraijs.com/api/1.0/users')
-      .then((response) => this.props.setUsers(response.data.items));
+      .get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${usersOnPage}`)
+      .then((response) => {
+        this.props.setUsers(response.data.items, response.data.totalCount);
+      });
+  }
+
+  componentDidMount() {
+    this.getUsers();
   }
 
   render () {
+    const { currentPage, usersOnPage, totalUsersCount } = this.props;
+    const pagesCount = Math.ceil(totalUsersCount / usersOnPage);
+    const pagesArr = [currentPage-2, currentPage-1, currentPage, currentPage+1, currentPage+2]
+      .filter((pageNumber) => pageNumber > 0)
+      .filter((pageNumber) => pageNumber <= pagesCount);
+
+    const pageItems = pagesArr.map((pageNumber) => {
+      return <span className={ `${classes.pageNumber} ${pageNumber === currentPage && classes.selectedPage}` }
+                   onClick={() => this.onPageClick(pageNumber)}
+      >
+        { pageNumber }
+      </span>
+    })
     const usersItems = this.props.users?.map(
       (user) => (
         <div key={user.id} className={classes.userItem}>
@@ -42,9 +69,14 @@ class Users extends React.Component {
       )
     );
 
-    return <div className={classes.users}>
-      { usersItems }
-    </div>
+    return <>
+      <div className={classes.pagination}>
+          { pageItems }
+      </div>
+      <div className={classes.users}>
+        { usersItems }
+      </div>
+    </>
   }
 }
 

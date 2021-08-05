@@ -38,3 +38,23 @@
     justify-content: space-between;
 }
 
+.selectedPage {
+    font-weight: bold;
+    transform: scale(1.2);
+}
+
+.pagination {
+    text-align: center;
+}
+
+.pageNumber {
+    display: inline-block;
+    cursor: pointer;
+    padding: 4px;
+    transition: transform .3s ease;
+}
+
+.pageNumber:hover {
+    transform: scale(1.5);
+}
+
