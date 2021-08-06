@@ -1,8 +1,17 @@
 .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     grid-area: app_header;
     background-color: green;
 }
 
 .header img {
     width: 40px;
+}
+
+.header,
+.header a {
+    color: white;
+    text-decoration: none;
 }
