@@ -7,6 +7,7 @@ import {
   DEFAULT_USER_CITY,
 } from '../../const/settings';
 import Preloader from '../common/Preloader';
+import { NavLink } from 'react-router-dom';
 
 const Users = (props) => {
   const { currentPage, usersOnPage, totalUsersCount } = props;
@@ -28,7 +29,9 @@ const Users = (props) => {
       <div key={user.id} className={classes.userItem}>
         <div className={classes.userAvatar}>
           <div className={classes.avatarWrapper}>
-            <img src={user.photos.small || defaultAvatar} alt="user avatar" className={classes.avatarImg} />
+            <NavLink to={`/profile/${user.id}`}>
+              <img src={user.photos.small || defaultAvatar} alt="user avatar" className={classes.avatarImg} />
+            </NavLink>
           </div>
           { user.followed
             ? <button onClick={() => props.unfollowUser(user.id)}>Followed</button>

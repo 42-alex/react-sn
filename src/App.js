@@ -22,7 +22,7 @@ function App() {
         <Navbar/>
         <div className='app-wrapper-content'>
           <Switch>
-            <Route path='/profile'>
+            <Route path='/profile/:profileId?'>
               <ProfileContainer />
             </Route>
             <Route path='/messages'>
