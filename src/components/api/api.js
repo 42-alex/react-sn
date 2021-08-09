@@ -31,8 +31,15 @@ const authApi = {
   },
 }
 
+const profileApi = {
+  getProfile(profileId) {
+    return axiosInstance.get(`profile/${profileId}`);
+  },
+}
+
 
 export {
   usersApi,
   authApi,
+  profileApi,
 };
