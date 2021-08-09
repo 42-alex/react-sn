@@ -23,10 +23,16 @@ const usersApi = {
     return axiosInstance
       .delete(`follow/${userId}`)
   },
+}
 
+const authApi = {
+  authMe() {
+    return axiosInstance.get('auth/me');
+  },
 }
 
 
 export {
   usersApi,
+  authApi,
 };
