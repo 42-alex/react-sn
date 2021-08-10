@@ -1,6 +1,6 @@
 import React from 'react';
 import Profile from './Profile';
-import { profileApi } from '../api/api';
+import { profileApi } from '../../api/api';
 import { connect } from 'react-redux';
 import { setUserProfile } from '../../redux/reducers/profile-reducer';
 import { withRouter } from 'react-router-dom';

@@ -8,7 +8,7 @@ import {
   toggleFetching,
   toggleUserFollowingProgress,
 } from '../../redux/reducers/users-reducer';
-import { usersApi } from '../api/api';
+import { usersApi } from '../../api/api';
 import Users from './Users';
 
 class UsersContainer extends React.Component {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { authApi } from '../api/api';
+import { authApi } from '../../api/api';
 import Header from './Header';
 import { setUserData, unsetUserData } from '../../redux/reducers/auth-reducer';
 import { connect } from 'react-redux';
