@@ -1,3 +1,5 @@
+import { authApi } from '../../api/api';
+
 const SET_USER_DATA = 'SET_USER_DATA';
 const UNSET_USER_DATA = 'UNSET_USER_DATA';
 
@@ -24,5 +26,17 @@ const authReducer = (state = initialState, action) => {
 
 export const setUserData = (id, login, email) => ({ type: SET_USER_DATA, id, login, email });
 export const unsetUserData = () => ({ type: UNSET_USER_DATA });
+
+export const authMeThunkCreator = () => (dispatch) => {
+  authApi.authMe()
+    .then((response) => {
+      if (response.data.resultCode === 0) {
+        const { id, login, email } = response.data.data;
+        dispatch(setUserData(id, login, email));
+      } else {
+        dispatch(unsetUserData());
+      }
+    })
+}
 
 export default authReducer;
