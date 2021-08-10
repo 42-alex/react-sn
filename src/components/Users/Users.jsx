@@ -33,9 +33,15 @@ const Users = (props) => {
               <img src={user.photos.small || defaultAvatar} alt="user avatar" className={classes.avatarImg} />
             </NavLink>
           </div>
-          { user.followed
-            ? <button onClick={() => props.unfollowUser(user.id)}>Unfollow</button>
-            : <button onClick={() => props.followUser(user.id)}>Follow</button>
+          {user.followed
+            ? <button
+              disabled={props.followingInProgress.includes(user.id)}
+              onClick={() => props.unfollowUser(user.id)}
+            >Unfollow</button>
+            : <button
+              disabled={props.followingInProgress.includes(user.id)}
+              onClick={() => props.followUser(user.id)}
+            >Follow</button>
           }
         </div>
         <div className={classes.userInfo}>
