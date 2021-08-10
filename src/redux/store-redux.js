@@ -1,4 +1,5 @@
-import { combineReducers, createStore } from 'redux';
+import { applyMiddleware, combineReducers, createStore } from 'redux';
+import ThunkMiddleware from 'redux-thunk';
 import dialogsReducer from './reducers/dialogs-reducer';
 import profileReducer from './reducers/profile-reducer';
 import usersReducer from './reducers/users-reducer';
@@ -11,7 +12,10 @@ const reducers = combineReducers({
   auth: authReducer,
 })
 
-const store = createStore(reducers);
+const store = createStore(
+  reducers,
+  applyMiddleware(ThunkMiddleware),
+);
 
 // todo remove it in production mode
 window.store = store;
