@@ -4,6 +4,7 @@ import {
   updateMessageInputActionCreator
 } from '../../redux/reducers/dialogs-reducer';
 import { connect } from 'react-redux';
+import withAuthRedirect from '../../hoc/withAuthRedirect';
 
 const mapStateToProps = (state) => ({
   dialogs: state.dialogsPage.dialogs,
@@ -22,6 +23,7 @@ const mapDispatchToProps = (dispatch) => ({
   }
 });
 
-const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs);
+const DialogsContainerWithAutProtection = withAuthRedirect(Dialogs)
+const DialogsContainerConnected = connect(mapStateToProps, mapDispatchToProps)(DialogsContainerWithAutProtection);
 
-export default DialogsContainer;
+export default DialogsContainerConnected;
