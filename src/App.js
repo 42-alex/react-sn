@@ -22,6 +22,9 @@ function App() {
         <Navbar/>
         <div className='app-wrapper-content'>
           <Switch>
+            <Route path='/login'>
+              <div>Login page</div>
+            </Route>
             <Route path='/profile/:profileId?'>
               <ProfileContainer />
             </Route>
