@@ -1,5 +1,7 @@
 import Preloader from '../../common/Preloader';
+import defaultAvatar from '../../../assets/images/avatar.jpg';
 import classes from './ProfileInfo.module.css';
+import ProfileStatus from './ProfileStatus';
 
 const ProfileInfo = (props) => {
   if (!props.userProfile) {
@@ -18,7 +20,7 @@ const ProfileInfo = (props) => {
         <div>Full name: {props.userProfile.fullName}</div>
         <div>About me: {props.userProfile.aboutMe}</div>
         <div>
-          <img src={props.userProfile.photos.small} alt="Profile" />
+          <img src={props.userProfile.photos.small || defaultAvatar} alt="Profile" />
         </div>
       </div>
     </>
