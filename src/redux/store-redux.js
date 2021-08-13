@@ -4,12 +4,14 @@ import dialogsReducer from './reducers/dialogs-reducer';
 import profileReducer from './reducers/profile-reducer';
 import usersReducer from './reducers/users-reducer';
 import authReducer from './reducers/auth-reducer';
+import { reducer as formReducer } from 'redux-form';
 
 const reducers = combineReducers({
   profilePage: profileReducer,
   dialogsPage: dialogsReducer,
   usersPage: usersReducer,
   auth: authReducer,
+  form: formReducer,
 })
 
 const store = createStore(

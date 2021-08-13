@@ -11,6 +11,7 @@ import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import UsersContainer from './components/Users/UsersContainer';
 import Settings from './components/Settings/Settings';
+import LoginPage from './components/Login/Login';
 import './App.css';
 
 function App() {
@@ -23,7 +24,7 @@ function App() {
         <div className='app-wrapper-content'>
           <Switch>
             <Route path='/login'>
-              <div>Login page</div>
+              <LoginPage />
             </Route>
             <Route path='/profile/:profileId?'>
               <ProfileContainer />
