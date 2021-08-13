@@ -22,7 +22,7 @@ const ProfileInfo = (props) => {
         <div>
           <img src={props.userProfile.photos.small || defaultAvatar} alt="Profile" />
         </div>
-        <ProfileStatus status="I'm looking for some adventures" />
+        <ProfileStatus status={ props.userProfile.status } setUserStatus={ props.setUserStatus } />
       </div>
     </>
   )

@@ -35,6 +35,12 @@ const profileApi = {
   getProfile(profileId) {
     return axiosInstance.get(`profile/${profileId}`);
   },
+  getProfileStatus(userId) {
+    return axiosInstance.get(`profile/status/${userId}`);
+  },
+  setProfileStatus(statusText) {
+    return axiosInstance.put(`profile/status`, { status: statusText });
+  },
 }
 
 

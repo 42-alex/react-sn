@@ -5,7 +5,7 @@ import classes from './Profile.module.css';
 const Profile = (props) => {
   return (
     <div className={classes.profileWrapper}>
-      <ProfileInfo userProfile={ props.userProfile } />
+      <ProfileInfo userProfile={ props.userProfile } setUserStatus={props.setUserStatus} />
       <MyPostsContainer />
     </div>
   );
