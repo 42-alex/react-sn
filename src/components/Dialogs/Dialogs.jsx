@@ -1,5 +1,6 @@
 import DialogItem from './DialogItem/DialogItem';
 import Message from './Message/Message';
+import NewMessageForm from './NewMessageForm/NewMessageForm';
 import classes from './Dialogs.module.css';
 
 const Dialogs = (props) => {
@@ -10,13 +11,8 @@ const Dialogs = (props) => {
     <Message key={el.id} message={el.message} />
   )
 
-  const onSendMessageClick = () => {
-    props.sendMessage();
-  }
-
-  const onMessageTextChange = (e) => {
-    const newMessageText = e.target.value;
-    props.updateMessageText(newMessageText);
+  const onFormSubmit = (formData) => {
+    props.setNewMessageInStore(formData.newMessageText);
   }
 
   return (
@@ -26,10 +22,7 @@ const Dialogs = (props) => {
       </div>
       <div className={classes.messages}>
         { messagesElements }
-        <div className={classes.newMessageForm}>
-          <textarea value={props.newMessageText} onChange={onMessageTextChange} />
-          <input type="button" value="Send" onClick={onSendMessageClick} />
-        </div>
+        <NewMessageForm onSubmit={ onFormSubmit } />
       </div>
     </div>
   );
