@@ -4,16 +4,17 @@ const LoginForm = (props) => {
   return (
     <form onSubmit={ props.handleSubmit }>
       <div>
-        <label htmlFor="login">Login</label>
-        <Field name="login" type="text" component="input" />
+        <label htmlFor="loginField">Login</label>
+        <Field name="login" id="loginField" type="text" component="input" />
       </div>
       <div>
-        <label htmlFor="password">Password</label>
-        <Field name="password" type="password" component="input" />
+        <label htmlFor="passwordField">Password</label>
+        <Field name="password" id="passwordField" type="password" component="input" />
+
       </div>
       <div>
-        <label htmlFor="rememberMe">Remember me</label>
-        <Field name="rememberMe" type="checkbox" component="input" />
+        <label htmlFor="rememberMeField">Remember me</label>
+        <Field name="rememberMe" id="rememberMeField" type="checkbox" component="input" />
       </div>
       <div>
         <button>Submit</button>
