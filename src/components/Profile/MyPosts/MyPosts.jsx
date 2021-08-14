@@ -1,28 +1,22 @@
 import Post from "./Post/Post";
 import classes from './MyPosts.module.css';
+import NewPostForm from './NewPostForm/NewPostForm';
 
-const MyPosts = ({ posts, newPostText, addPost, updateNewPostText }) => {
+const MyPosts = ({ posts, setNewPostInStore }) => {
 
   const postsElements = posts.map(el =>
     <Post key={el.id} text={el.text} likesCount={el.likesCount} />
   );
 
-  const onAddClick = () => {
-    addPost();
-  }
-
-  const onPostTextChange = (e) => {
-    updateNewPostText(e.target.value)
+  const onFormSubmit = (formData) => {
+    setNewPostInStore(formData.newPostText);
   }
 
   return (
     <>
       <div className={classes.postForm}>
-        my posts
-        <div>
-          <textarea value={newPostText} onChange={onPostTextChange} />
-          <input type="button" value="Add new post" onClick={onAddClick} />
-        </div>
+        <h2>my posts</h2>
+        <NewPostForm onSubmit={onFormSubmit} />
       </div>
       <div>
         { postsElements }
