@@ -1,0 +1,11 @@
+.input .error {
+    border: 2px red solid;
+}
+
+.errorMsg {
+    color: red;
+}
+
+p {
+    margin: 0;
+}
