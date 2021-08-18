@@ -3,6 +3,7 @@ import c from './ValidateInput.module.css';
 const ValidatedInput = (props) => {
   const { touched, error } = props.meta;
   const { input, type, label, placeholder } = props;
+  const hasError = touched && error;
 
   return (
     <div className={c.input}>
@@ -10,10 +11,10 @@ const ValidatedInput = (props) => {
       <props.element
         type={type}
         placeholder={placeholder}
-        className={`${error && c.error }`}
+        className={` ${ hasError ? c.error : '' }`}
         { ...input }
       />
-      { (touched && error) && <p className={c.errorMsg}>* { error }</p> }
+      { hasError && <p className={c.errorMsg}>* { error }</p> }
     </div>
   );
 }
