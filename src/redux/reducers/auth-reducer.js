@@ -39,4 +39,13 @@ export const authMe = () => (dispatch) => {
     })
 }
 
+export const login = (email, password, rememberMe) => (dispatch) => {
+  authApi.login(email, password, rememberMe)
+    .then((response) => {
+      if (response.data.resultCode === 0) {
+        dispatch(authMe());
+      }
+    })
+}
+
 export default authReducer;

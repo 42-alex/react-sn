@@ -6,10 +6,10 @@ const LoginForm = (props) => {
   return (
     <form onSubmit={ props.handleSubmit }>
       <div>
-        <label htmlFor="loginField">Login</label>
+        <label htmlFor="loginField">Email</label>
         <Field
           element="input"
-          name="login"
+          name="email"
           id="loginField"
           type="text"
           component={ ValidatedInput }

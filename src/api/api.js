@@ -29,6 +29,9 @@ const authApi = {
   authMe() {
     return axiosInstance.get('auth/me');
   },
+  login(email, password, rememberMe) {
+    return axiosInstance.post('auth/login', { email, password, rememberMe });
+  },
 }
 
 const profileApi = {
