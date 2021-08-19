@@ -1,3 +1,4 @@
+import { Component } from 'react';
 import {
   BrowserRouter as Router,
   Route,
@@ -14,44 +15,47 @@ import Settings from './components/Settings/Settings';
 import LoginPage from './components/Login/Login';
 import './App.css';
 
-function App() {
 
-  return (
-    <Router>
-      <div className='app-wrapper'>
-        <HeaderContainer />
-        <Navbar/>
-        <div className='app-wrapper-content'>
-          <Switch>
-            <Route path='/login'>
-              <LoginPage />
-            </Route>
-            <Route path='/profile/:profileId?'>
-              <ProfileContainer />
-            </Route>
-            <Route path='/messages'>
-              <DialogsContainer />
-            </Route>
-            <Route path='/news'>
-              <News />
-            </Route>
-            <Route path='/music'>
-              <Music />
-            </Route>
-            <Route path='/users'>
-              <UsersContainer />
-            </Route>
-            <Route path='/settings'>
-              <Settings />
-            </Route>
-            <Route path='/'>
-              <ProfileContainer />
-            </Route>
-          </Switch>
+class App extends Component {
+  render() {
+
+    return (
+      <Router>
+        <div className='app-wrapper'>
+          <HeaderContainer/>
+          <Navbar/>
+          <div className='app-wrapper-content'>
+            <Switch>
+              <Route path='/login'>
+                <LoginPage/>
+              </Route>
+              <Route path='/profile/:profileId?'>
+                <ProfileContainer/>
+              </Route>
+              <Route path='/messages'>
+                <DialogsContainer/>
+              </Route>
+              <Route path='/news'>
+                <News/>
+              </Route>
+              <Route path='/music'>
+                <Music/>
+              </Route>
+              <Route path='/users'>
+                <UsersContainer/>
+              </Route>
+              <Route path='/settings'>
+                <Settings/>
+              </Route>
+              <Route path='/'>
+                <ProfileContainer/>
+              </Route>
+            </Switch>
+          </div>
         </div>
-      </div>
-    </Router>
-  );
+      </Router>
+    );
+  }
 }
 
 export default App;
