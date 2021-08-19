@@ -40,23 +40,23 @@ const profileReducer = (state = initialState, action) => {
 }
 
 export const setNewPostInStore = (newPostText) => ({ type: ADD_POST, newPostText });
-export const setUserProfile = (userProfile) => ({ type: SET_USER_PROFILE, userProfile })
-export const setUserStatus = (userStatus) => ({ type: SET_USER_STATUS, userStatus })
+export const setUserProfileSuccess = (userProfile) => ({ type: SET_USER_PROFILE, userProfile })
+export const setUserStatusSuccess = (userStatus) => ({ type: SET_USER_STATUS, userStatus })
 
-export const getUserProfileThunkCreator = (profileId) => (dispatch) => {
+export const getUserProfile = (profileId) => (dispatch) => {
   profileApi.getProfile(profileId)
     .then((response) => {
-      dispatch(setUserProfile(response.data));
+      dispatch(setUserProfileSuccess(response.data));
       profileApi.getProfileStatus(response.data.userId)
         .then((response) => { dispatch(setUserStatus(response.data)) })
     })
 }
 
-export const setUserStatusThunkCreator = (statusText) => (dispatch) => {
+export const setUserStatus = (statusText) => (dispatch) => {
   profileApi.setProfileStatus(statusText)
     .then((response) => {
       if (response.data.resultCode === 0) {
-        dispatch(setUserStatus(statusText));
+        dispatch(setUserStatusSuccess(statusText));
       }
     })
 }

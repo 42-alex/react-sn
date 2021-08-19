@@ -2,9 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {
   setCurrentPage,
-  getUsersThunkCreator,
-  followUserThunkCreator,
-  unFollowUserThunkCreator,
+  getUsers,
+  followUser,
+  unFollowUser,
 } from '../../redux/reducers/users-reducer';
 import Users from './Users';
 import { compose } from 'redux';
@@ -19,15 +19,15 @@ class UsersContainer extends React.Component {
 
   getUsers = (currentPage = this.props.currentPage) => {
     const usersOnPage= this.props.usersOnPage;
-    this.props.getUsersThunkCreator(currentPage, usersOnPage);
+    this.props.getUsers(currentPage, usersOnPage);
   }
 
   followUser = (userId) => {
-    this.props.followUserThunkCreator(userId);
+    this.props.followUser(userId);
   }
 
   unfollowUser = (userId) => {
-    this.props.unFollowUserThunkCreator(userId);
+    this.props.unFollowUser(userId);
   }
 
   componentDidMount() {
@@ -64,5 +64,5 @@ export default compose(
   withAuthRedirect,
   connect(
     mapStateToProps,
-    { setCurrentPage, getUsersThunkCreator, followUserThunkCreator, unFollowUserThunkCreator }
+    { setCurrentPage, getUsers, followUser, unFollowUser }
   ))(UsersContainer);

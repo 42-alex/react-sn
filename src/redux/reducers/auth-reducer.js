@@ -27,7 +27,7 @@ const authReducer = (state = initialState, action) => {
 export const setUserData = (id, login, email) => ({ type: SET_USER_DATA, id, login, email });
 export const unsetUserData = () => ({ type: UNSET_USER_DATA });
 
-export const authMeThunkCreator = () => (dispatch) => {
+export const authMe = () => (dispatch) => {
   authApi.authMe()
     .then((response) => {
       if (response.data.resultCode === 0) {
