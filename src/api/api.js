@@ -32,6 +32,9 @@ const authApi = {
   login(email, password, rememberMe) {
     return axiosInstance.post('auth/login', { email, password, rememberMe });
   },
+  logout() {
+    return axiosInstance.delete('auth/login');
+  },
 }
 
 const profileApi = {

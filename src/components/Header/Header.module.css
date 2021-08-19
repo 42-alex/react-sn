@@ -15,3 +15,13 @@
     color: white;
     text-decoration: none;
 }
+
+.logoutBtn {
+    display: block;
+    background: 0;
+    border: 0;
+    color: #a7a7ca;
+    margin-left: auto;
+    padding: 0;
+    cursor: pointer;
+}

@@ -48,4 +48,13 @@ export const login = (email, password, rememberMe) => (dispatch) => {
     })
 }
 
+export const logout = () => (dispatch) => {
+  authApi.logout()
+    .then((response) => {
+      if (response.data.resultCode === 0) {
+        dispatch(authMe());
+      }
+    })
+}
+
 export default authReducer;
