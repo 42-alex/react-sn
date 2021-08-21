@@ -13,10 +13,17 @@ import Music from "./components/Music/Music";
 import UsersContainer from './components/Users/UsersContainer';
 import Settings from './components/Settings/Settings';
 import LoginPage from './components/Login/Login';
+import { connect } from 'react-redux';
+import { authMe } from './redux/reducers/auth-reducer';
 import './App.css';
 
 
 class App extends Component {
+
+  componentDidMount() {
+    this.props.authMe();
+  }
+
   render() {
 
     return (
@@ -58,4 +65,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect(null, { authMe })(App);
