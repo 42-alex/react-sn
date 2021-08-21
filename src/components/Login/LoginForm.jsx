@@ -1,6 +1,7 @@
 import { Field, reduxForm } from 'redux-form';
 import ValidatedInput from '../common/ValidatedInput/ValidatedInput';
 import { required, maxLength25 } from '../../utils/validators';
+import c from './Login.module.css';
 
 const LoginForm = (props) => {
   return (
@@ -31,6 +32,7 @@ const LoginForm = (props) => {
         <label htmlFor="rememberMeField">Remember me</label>
         <Field name="rememberMe" id="rememberMeField" type="checkbox" component="input" />
       </div>
+      { props.error && <span className={c.loginServerError}>{ props.error }</span> }
       <div>
         <button>Submit</button>
       </div>
