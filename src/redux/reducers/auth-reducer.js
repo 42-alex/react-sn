@@ -29,7 +29,7 @@ export const setUserData = (id, login, email) => ({ type: SET_USER_DATA, id, log
 export const unsetUserData = () => ({ type: UNSET_USER_DATA });
 
 export const authMe = () => (dispatch) => {
-  authApi.authMe()
+  return authApi.authMe()
     .then((response) => {
       if (response.data.resultCode === 0) {
         const { id, login, email } = response.data.data;

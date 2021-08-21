@@ -14,17 +14,21 @@ import UsersContainer from './components/Users/UsersContainer';
 import Settings from './components/Settings/Settings';
 import LoginPage from './components/Login/Login';
 import { connect } from 'react-redux';
-import { authMe } from './redux/reducers/auth-reducer';
+import { initializeApp } from './redux/reducers/app-reducer';
+import Preloader from './components/common/Preloader';
 import './App.css';
 
 
 class App extends Component {
 
   componentDidMount() {
-    this.props.authMe();
+    this.props.initializeApp();
   }
 
   render() {
+    if (!this.props.initialized) {
+      return <Preloader />;
+    }
 
     return (
       <Router>
@@ -65,4 +69,8 @@ class App extends Component {
   }
 }
 
-export default connect(null, { authMe })(App);
+const mapStateToProps = (state) => ({
+  initialized: state.app.initialized,
+})
+
+export default connect(mapStateToProps, { initializeApp })(App);
