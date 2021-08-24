@@ -4,37 +4,3 @@
     padding: 10px;
 }
 
-.userItem {
-    display: flex;
-    margin-bottom: 15px;
-}
-
-.userAvatar {
-    flex-grow: 1;
-    min-width: 120px;
-}
-
-.userInfo {
-    display: flex;
-    justify-content: space-between;
-    flex-grow: 9;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 5px;
-}
-
-.avatarWrapper {
-    width: 50px;
-    height: 50px;
-}
-
-.avatarWrapper img {
-    width: 100%;
-}
-
-.mainInfo {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
