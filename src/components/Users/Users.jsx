@@ -8,22 +8,10 @@ import {
 } from '../../const/settings';
 import Preloader from '../common/Preloader';
 import { NavLink } from 'react-router-dom';
+import Paginator from '../common/Paginator/Paginator';
 
 const Users = (props) => {
-  const { currentPage, usersOnPage, totalUsersCount } = props;
-  const pagesCount = Math.ceil(totalUsersCount / usersOnPage);
-  const pagesArr = [currentPage-2, currentPage-1, currentPage, currentPage+1, currentPage+2]
-    .filter((pageNumber) => pageNumber > 0)
-    .filter((pageNumber) => pageNumber <= pagesCount);
-
-  const pageItems = pagesArr.map((pageNumber) => {
-    return <span className={ `${classes.pageNumber} ${pageNumber === currentPage && classes.selectedPage}` }
-                 onClick={() => props.onPageNumberClick(pageNumber)}
-    >
-      { pageNumber }
-    </span>
-  })
-
+  const { currentPage, usersOnPage, totalUsersCount, onPageNumberClick } = props;
   const usersItems = props.users.map(
     (user) => (
       <div key={user.id} className={classes.userItem}>
@@ -60,9 +48,8 @@ const Users = (props) => {
 
   return <>
     { props.isFetching && <Preloader /> }
-    <div className={classes.pagination}>
-        { pageItems }
-    </div>
+    <Paginator currentPage={currentPage} usersOnPage={usersOnPage} totalUsersCount={totalUsersCount}
+               onPageNumberClick={onPageNumberClick} />
     <div className={classes.users}>
       { usersItems }
     </div>
