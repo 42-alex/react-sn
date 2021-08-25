@@ -44,22 +44,18 @@ export const setNewPostInStore = (newPostText) => ({ type: ADD_POST, newPostText
 export const setUserProfileSuccess = (userProfile) => ({ type: SET_USER_PROFILE, userProfile })
 export const setUserStatusSuccess = (userStatus) => ({ type: SET_USER_STATUS, userStatus })
 
-export const getUserProfile = (profileId) => (dispatch) => {
-  profileApi.getProfile(profileId)
-    .then((response) => {
-      dispatch(setUserProfileSuccess(response.data));
-      profileApi.getProfileStatus(response.data.userId)
-        .then((response) => { dispatch(setUserStatus(response.data)) })
-    })
+export const getUserProfile = (profileId) => async (dispatch) => {
+  const getProfileResponse = await profileApi.getProfile(profileId);
+  dispatch(setUserProfileSuccess(getProfileResponse.data));
+  const getProfileStatusResponse = await profileApi.getProfileStatus(getProfileResponse.data.userId);
+  dispatch(setUserStatusSuccess(getProfileStatusResponse.data));
 }
 
-export const setUserStatus = (statusText) => (dispatch) => {
-  profileApi.setProfileStatus(statusText)
-    .then((response) => {
-      if (response.data.resultCode === 0) {
-        dispatch(setUserStatusSuccess(statusText));
-      }
-    })
+export const setUserStatus = (statusText) => async (dispatch) => {
+  const setProfileStatusResponse = await profileApi.setProfileStatus(statusText)
+  if (setProfileStatusResponse.data.resultCode === 0) {
+    dispatch(setUserStatusSuccess(statusText));
+  }
 }
 
 export default profileReducer;
