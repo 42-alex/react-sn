@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import React, { Suspense } from 'react';
 import {
   BrowserRouter as Router,
   Route,
@@ -7,9 +7,6 @@ import {
 import HeaderContainer from './components/Header/HeaderContainer';
 import Navbar from "./components/Navbar/Navbar";
 import ProfileContainer from "./components/Profile/ProfileContainer";
-import DialogsContainer from "./components/Dialogs/DialogsContainer";
-import News from "./components/News/News";
-import Music from "./components/Music/Music";
 import UsersContainer from './components/Users/UsersContainer';
 import Settings from './components/Settings/Settings';
 import LoginPage from './components/Login/Login';
@@ -18,8 +15,12 @@ import { initializeApp } from './redux/reducers/app-reducer';
 import Preloader from './components/common/Preloader';
 import './App.css';
 
+const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
+const News = React.lazy(() => import('./components/News/News'));
+const Music = React.lazy(() => import('./components/Music/Music'));
 
-class App extends Component {
+
+class App extends React.Component {
 
   componentDidMount() {
     this.props.initializeApp();
@@ -44,13 +45,19 @@ class App extends Component {
                 <ProfileContainer/>
               </Route>
               <Route path='/messages'>
-                <DialogsContainer/>
+                <Suspense fallback={<div>Loading...</div>}>
+                  <DialogsContainer />
+                </Suspense>
               </Route>
               <Route path='/news'>
-                <News/>
+                <Suspense fallback={<div>Loading...</div>}>
+                  <News />
+                </Suspense>
               </Route>
               <Route path='/music'>
-                <Music/>
+                <Suspense fallback={<div>Loading...</div>}>
+                  <Music />
+                </Suspense>
               </Route>
               <Route path='/users'>
                 <UsersContainer/>
