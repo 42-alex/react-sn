@@ -12,7 +12,7 @@ const ProfileInfo = (props) => {
       <div>
         <div>Full name: {props.userProfile.fullName}</div>
         <div>About me: {props.userProfile.aboutMe}</div>
-        <ProfileAvatar avatarUrl={props.userProfile.photos.large} />
+        <ProfileAvatar avatarUrl={props.userProfile.photos.large} updateAvatar={props.updateAvatar} />
         <ProfileStatus status={ props.userProfile.status } setUserStatus={ props.setUserStatus } />
       </div>
     </>

@@ -47,6 +47,15 @@ const profileApi = {
   setProfileStatus(statusText) {
     return axiosInstance.put(`profile/status`, { status: statusText });
   },
+  updateAvatar(avatarFile) {
+    let data = new FormData();
+    data.append('image', avatarFile);
+    return axiosInstance.put(`profile/photo`, data, {
+      headers: {
+        'Content-Type': `multipart/form-data`,
+      }
+    });
+  },
 }
 
 

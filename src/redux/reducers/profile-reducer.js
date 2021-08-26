@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 const ADD_POST = 'ADD_POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_USER_STATUS = 'SET_USER_STATUS';
+const UPDATE_AVATAR = 'UPDATE_AVATAR';
 
 const initialState = {
   posts: [
@@ -35,6 +36,9 @@ const profileReducer = (state = initialState, action) => {
     case SET_USER_STATUS:
       return { ...state, userProfile: { ...state.userProfile, status: action.userStatus } };
 
+    case UPDATE_AVATAR:
+      return { ...state, userProfile: { ...state.userProfile, photos: action.userProfilePhotos } };
+
     default:
       return state;
   }
@@ -43,6 +47,7 @@ const profileReducer = (state = initialState, action) => {
 export const setNewPostInStore = (newPostText) => ({ type: ADD_POST, newPostText });
 export const setUserProfileSuccess = (userProfile) => ({ type: SET_USER_PROFILE, userProfile })
 export const setUserStatusSuccess = (userStatus) => ({ type: SET_USER_STATUS, userStatus })
+export const updateAvatarSuccess = (userProfilePhotos) => ({ type: UPDATE_AVATAR, userProfilePhotos })
 
 export const getUserProfile = (profileId) => async (dispatch) => {
   const getProfileResponse = await profileApi.getProfile(profileId);
@@ -55,6 +60,13 @@ export const setUserStatus = (statusText) => async (dispatch) => {
   const setProfileStatusResponse = await profileApi.setProfileStatus(statusText)
   if (setProfileStatusResponse.data.resultCode === 0) {
     dispatch(setUserStatusSuccess(statusText));
+  }
+}
+
+export const updateAvatar = (avatarFile) => async (dispatch) => {
+  const updateAvatarResponse = await profileApi.updateAvatar(avatarFile)
+  if (updateAvatarResponse.data.resultCode === 0) {
+    dispatch(updateAvatarSuccess(updateAvatarResponse.data.data.photos));
   }
 }
 
