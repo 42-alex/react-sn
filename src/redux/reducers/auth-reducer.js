@@ -3,12 +3,14 @@ import { stopSubmit } from 'redux-form';
 
 const SET_USER_DATA = 'social_network/app/SET_USER_DATA';
 const UNSET_USER_DATA = 'social_network/app/UNSET_USER_DATA';
+const SET_CAPTCHA_URL = 'social_network/app/SET_CAPTCHA_URL';
 
 const initialState = {
   id: null,
   login: null,
   email: null,
   isAuthorized: false,
+  captchaUrl: null,
 };
 
 const authReducer = (state = initialState, action) => {
@@ -20,6 +22,9 @@ const authReducer = (state = initialState, action) => {
     case UNSET_USER_DATA:
       return initialState;
 
+    case SET_CAPTCHA_URL:
+      return { ...state, captchaUrl: action.captchaUrl };
+
     default:
       return state;
   }
@@ -27,6 +32,7 @@ const authReducer = (state = initialState, action) => {
 
 export const setUserData = (id, login, email) => ({ type: SET_USER_DATA, id, login, email });
 export const unsetUserData = () => ({ type: UNSET_USER_DATA });
+export const setCaptchaUrl = (captchaUrl) => ({ type: SET_CAPTCHA_URL, captchaUrl });
 
 export const authMe = () => async (dispatch) => {
   const authMeResponse = await authApi.authMe();
@@ -38,11 +44,20 @@ export const authMe = () => async (dispatch) => {
   }
 }
 
-export const login = (email, password, rememberMe) => async (dispatch) => {
-  const loginResponse = await authApi.login(email, password, rememberMe);
-  if (loginResponse.data.resultCode === 0) {
+export const getCaptchaUrl = () => async (dispatch) => {
+  const captchaUrlResponse = await authApi.getCaptchaUrl();
+  dispatch(setCaptchaUrl(captchaUrlResponse.data.url))
+}
+
+export const login = (loginData) => async (dispatch) => {
+  const loginResponse = await authApi.login(loginData);
+  const resultCode = loginResponse.data.resultCode;
+  if (resultCode === 0) {
     dispatch(authMe());
   } else {
+    if(resultCode === 10) {
+      dispatch(getCaptchaUrl());
+    }
     const message = loginResponse.data.messages.length ? loginResponse.data.messages[0] : 'Server error';
     dispatch(stopSubmit('loginForm', { _error: message }))
   }

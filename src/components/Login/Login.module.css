@@ -1,3 +1,17 @@
+.loginForm {
+    padding: 15px;
+}
+
+.captchaImg {
+    display: block;
+    margin: 15px 0;
+    cursor: pointer;
+}
+
+.submitButtonWrapper {
+    margin-top: 25px;
+}
+
 .loginServerError {
     border: 1px red solid;
     color: red;

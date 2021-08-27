@@ -29,11 +29,14 @@ const authApi = {
   authMe() {
     return axiosInstance.get('auth/me');
   },
-  login(email, password, rememberMe) {
-    return axiosInstance.post('auth/login', { email, password, rememberMe });
+  login(loginData) {
+    return axiosInstance.post('auth/login', { ...loginData });
   },
   logout() {
     return axiosInstance.delete('auth/login');
+  },
+  getCaptchaUrl() {
+    return axiosInstance.get('security/get-captcha-url');
   },
 }
 
