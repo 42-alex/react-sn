@@ -12,9 +12,10 @@ import UsersContainer from './components/Users/UsersContainer';
 import Settings from './components/Settings/Settings';
 import LoginPage from './components/Login/Login';
 import { connect } from 'react-redux';
-import { initializeApp } from './redux/reducers/app-reducer';
+import { initializeApp, setGlobalError } from './redux/reducers/app-reducer';
 import Preloader from './components/common/Preloader';
 import NoMatch from './components/NoMatch/NoMatch';
+import GlobalErrorPopup from './components/GlobalErrorPopup/GlobalErrorPopup';
 import './App.css';
 
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
@@ -26,6 +27,15 @@ class App extends React.Component {
 
   componentDidMount() {
     this.props.initializeApp();
+    window.addEventListener('unhandledrejection', this.handleAllRejectedPromises);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('unhandledrejection', this.handleAllRejectedPromises);
+  }
+
+  handleAllRejectedPromises = (event) => {
+    this.props.setGlobalError(event.reason.message);
   }
 
   render() {
@@ -36,6 +46,9 @@ class App extends React.Component {
     return (
       <Router>
         <div className='app-wrapper'>
+          <GlobalErrorPopup
+            globalErrorMessage={this.props.globalErrorMessage}
+            setGlobalError={this.props.setGlobalError} />
           <HeaderContainer/>
           <Navbar/>
           <div className='app-wrapper-content'>
@@ -86,6 +99,7 @@ class App extends React.Component {
 
 const mapStateToProps = (state) => ({
   initialized: state.app.initialized,
+  globalErrorMessage: state.app.globalErrorMessage,
 })
 
-export default connect(mapStateToProps, { initializeApp })(App);
+export default connect(mapStateToProps, { initializeApp, setGlobalError })(App);
