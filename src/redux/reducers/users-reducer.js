@@ -1,12 +1,12 @@
 import { USERS_ON_PAGE } from '../../const/settings';
 import { usersApi } from '../../api/api';
 
-const SET_USERS = 'SET_USERS';
-const FOLLOW = 'FOLLOW';
-const UNFOLLOW = 'UNFOLLOW';
-const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
-const TOGGLE_FETCHING = 'TOGGLE_FETCHING';
-const TOGGLE_USER_FOLLOWING_PROGRESS = 'TOGGLE_USER_FOLLOWING_PROGRESS';
+const SET_USERS = 'social_network/app/SET_USERS';
+const FOLLOW = 'social_network/app/FOLLOW';
+const UNFOLLOW = 'social_network/app/UNFOLLOW';
+const SET_CURRENT_PAGE = 'social_network/app/SET_CURRENT_PAGE';
+const TOGGLE_FETCHING = 'social_network/app/TOGGLE_FETCHING';
+const TOGGLE_USER_FOLLOWING_PROGRESS = 'social_network/app/TOGGLE_USER_FOLLOWING_PROGRESS';
 
 const initialState = {
   users: [],

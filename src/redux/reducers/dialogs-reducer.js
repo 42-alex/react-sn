@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 
-const ADD_MESSAGE = 'ADD_MESSAGE';
+const ADD_MESSAGE = 'social_network/app/ADD_MESSAGE';
 
 const initialState = {
   dialogs: [
