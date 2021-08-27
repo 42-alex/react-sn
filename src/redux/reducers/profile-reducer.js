@@ -1,5 +1,6 @@
 import { profileApi } from '../../api/api';
 import { v4 as uuidv4 } from 'uuid';
+import { stopSubmit } from 'redux-form';
 
 
 const ADD_POST = 'ADD_POST';
@@ -81,6 +82,11 @@ export const setProfileData = (profileData) => async (dispatch) => {
   if (setProfileDataResponse.data.resultCode === 0) {
     dispatch(setUserProfileSuccess(profileData));
     dispatch(toggleProfileEditMode());
+  } else {
+    const message = setProfileDataResponse.data.messages.length
+      ? setProfileDataResponse.data.messages[0]
+      : 'Server error';
+    dispatch(stopSubmit('profileForm', {'_error': message}))
   }
 }
 

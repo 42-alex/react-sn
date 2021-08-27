@@ -9,3 +9,7 @@
 .contact {
   padding-left: 20px;
 }
+
+.commonError {
+  color: red;
+}

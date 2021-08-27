@@ -59,6 +59,7 @@ const ProfileDataForm = (props) => {
           ))
           }
         </div>
+        { props.error && <p className={c.commonError}>* {props.error}</p> }
         <div>
           <button>Ok</button>
           <button onClick={props.toggleEditMode} type="button">Cancel</button>
