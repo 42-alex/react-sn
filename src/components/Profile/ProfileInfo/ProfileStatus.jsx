@@ -30,14 +30,9 @@ const ProfileStatus = (props) => {
     <div>
       Status:
       {editMode
-        ? <div>
-          <input value={statusText} onBlur={saveStatus} onChange={onStatusChange} autoFocus />
-        </div>
-        : <div>
-          <span onDoubleClick={enableStatusEditMode}>{props.status || '(-- empty --)'}</span>
-        </div>
+        ? <input value={statusText} onBlur={saveStatus} onChange={onStatusChange} autoFocus />
+        : <span onDoubleClick={enableStatusEditMode}> {props.status || '(-- empty --)'}</span>
       }
-      <hr/>
     </div>
   );
 }
