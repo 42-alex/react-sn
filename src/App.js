@@ -1,6 +1,7 @@
 import React, { Suspense } from 'react';
 import {
   BrowserRouter as Router,
+  Redirect,
   Route,
   Switch
 } from 'react-router-dom';
@@ -13,6 +14,7 @@ import LoginPage from './components/Login/Login';
 import { connect } from 'react-redux';
 import { initializeApp } from './redux/reducers/app-reducer';
 import Preloader from './components/common/Preloader';
+import NoMatch from './components/NoMatch/NoMatch';
 import './App.css';
 
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
@@ -65,8 +67,14 @@ class App extends React.Component {
               <Route path='/settings'>
                 <Settings/>
               </Route>
-              <Route path='/'>
+              <Route exact path='/'>
                 <ProfileContainer/>
+              </Route>
+              <Route path='/404'>
+                <NoMatch />
+              </Route>
+              <Route path='*'>
+                <Redirect to="/404" />
               </Route>
             </Switch>
           </div>
