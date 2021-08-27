@@ -1,4 +1,5 @@
-import classes from './Paginator.module.css';
+import cn from 'classnames';
+import c from './Paginator.module.css';
 
 const Paginator = (props) => {
   const { currentPage, usersOnPage, totalUsersCount, onPageNumberClick } = props;
@@ -6,10 +7,14 @@ const Paginator = (props) => {
   const pagesArr = [currentPage-2, currentPage-1, currentPage, currentPage+1, currentPage+2]
     .filter((pageNumber) => pageNumber > 0)
     .filter((pageNumber) => pageNumber <= pagesCount);
+  const pageNumberClass = pageNumber => cn(
+    c.pageNumber,
+    { [c.selectedPage]: pageNumber === currentPage }
+  )
 
   const pageItems = pagesArr.map((pageNumber) => {
     return (
-      <span className={`${classes.pageNumber} ${pageNumber === currentPage ? classes.selectedPage : ''}`}
+      <span className={pageNumberClass(pageNumber)}
             onClick={() => onPageNumberClick(pageNumber)}
       >
       {pageNumber}
@@ -19,7 +24,7 @@ const Paginator = (props) => {
 
 
   return (
-    <div className={classes.pagination}>
+    <div className={c.pagination}>
       {pageItems}
     </div>
   )
