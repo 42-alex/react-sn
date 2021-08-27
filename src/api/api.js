@@ -56,6 +56,9 @@ const profileApi = {
       }
     });
   },
+  setProfileData(profileData) {
+    return axiosInstance.put(`profile/`, profileData);
+  },
 }
 
 

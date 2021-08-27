@@ -1,0 +1,11 @@
+.fieldDescription {
+  display: inline-block;
+  font-weight: bold;
+  min-width: 150px;
+}
+
+.fieldData {}
+
+.contact {
+  padding-left: 20px;
+}

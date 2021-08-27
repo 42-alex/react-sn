@@ -6,6 +6,7 @@ const ADD_POST = 'ADD_POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_USER_STATUS = 'SET_USER_STATUS';
 const UPDATE_AVATAR = 'UPDATE_AVATAR';
+const TOGGLE_EDIT_MODE = 'TOGGLE_EDIT_MODE';
 
 const initialState = {
   posts: [
@@ -14,6 +15,7 @@ const initialState = {
     { id: 3, text: 'Where is the bathroom?', likesCount: 0 },
   ],
   userProfile: null,
+  profileEditMode: false,
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -39,6 +41,9 @@ const profileReducer = (state = initialState, action) => {
     case UPDATE_AVATAR:
       return { ...state, userProfile: { ...state.userProfile, photos: action.userProfilePhotos } };
 
+    case TOGGLE_EDIT_MODE:
+      return { ...state, profileEditMode: !state.profileEditMode };
+
     default:
       return state;
   }
@@ -48,6 +53,7 @@ export const setNewPostInStore = (newPostText) => ({ type: ADD_POST, newPostText
 export const setUserProfileSuccess = (userProfile) => ({ type: SET_USER_PROFILE, userProfile })
 export const setUserStatusSuccess = (userStatus) => ({ type: SET_USER_STATUS, userStatus })
 export const updateAvatarSuccess = (userProfilePhotos) => ({ type: UPDATE_AVATAR, userProfilePhotos })
+export const toggleProfileEditMode = () => ({ type: TOGGLE_EDIT_MODE })
 
 export const getUserProfile = (profileId) => async (dispatch) => {
   const getProfileResponse = await profileApi.getProfile(profileId);
@@ -67,6 +73,14 @@ export const updateAvatar = (avatarFile) => async (dispatch) => {
   const updateAvatarResponse = await profileApi.updateAvatar(avatarFile)
   if (updateAvatarResponse.data.resultCode === 0) {
     dispatch(updateAvatarSuccess(updateAvatarResponse.data.data.photos));
+  }
+}
+
+export const setProfileData = (profileData) => async (dispatch) => {
+  const setProfileDataResponse = await profileApi.setProfileData(profileData)
+  if (setProfileDataResponse.data.resultCode === 0) {
+    dispatch(setUserProfileSuccess(profileData));
+    dispatch(toggleProfileEditMode());
   }
 }
 

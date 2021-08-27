@@ -5,6 +5,8 @@ import {
   getUserProfile,
   setUserStatus,
   updateAvatar,
+  setProfileData,
+  toggleProfileEditMode,
 } from '../../redux/reducers/profile-reducer';
 import { withRouter } from 'react-router-dom';
 import withAuthRedirect from '../../hoc/withAuthRedirect';
@@ -28,12 +30,15 @@ class ProfileContainer extends React.Component {
 
   render() {
     return <Profile userProfile={this.props.userProfile} setUserStatus={this.props.setUserStatus}
-                    updateAvatar={this.props.updateAvatar} />
+                    updateAvatar={this.props.updateAvatar} setProfileData={this.props.setProfileData}
+                    profileEditMode={this.props.profileEditMode}
+                    toggleProfileEditMode={this.props.toggleProfileEditMode} />
   }
 }
 
 const mapStateToProps = (state) => ({
   userProfile: state.profilePage.userProfile,
+  profileEditMode: state.profilePage.profileEditMode,
   thisProfileId: state.auth.id,
 })
 
@@ -41,6 +46,10 @@ const mapStateToProps = (state) => ({
 export default compose(
   withRouter,
   withAuthRedirect,
-  connect(mapStateToProps, { getUserProfile, setUserStatus, updateAvatar }),
+  connect(mapStateToProps,
+    { getUserProfile,
+      setUserStatus, updateAvatar,
+      setProfileData, toggleProfileEditMode, }
+  ),
 )(ProfileContainer);
 
