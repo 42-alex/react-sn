@@ -3,11 +3,11 @@ import { v4 as uuidv4 } from 'uuid';
 import { stopSubmit } from 'redux-form';
 
 
-const ADD_POST = 'social_network/app/ADD_POST';
-const SET_USER_PROFILE = 'social_network/app/SET_USER_PROFILE';
-const SET_USER_STATUS = 'social_network/app/SET_USER_STATUS';
-const UPDATE_AVATAR = 'social_network/app/UPDATE_AVATAR';
-const TOGGLE_EDIT_MODE = 'social_network/app/TOGGLE_EDIT_MODE';
+const ADD_POST = 'social_network/profile/ADD_POST';
+const SET_USER_PROFILE = 'social_network/profile/SET_USER_PROFILE';
+const SET_USER_STATUS = 'social_network/profile/SET_USER_STATUS';
+const UPDATE_AVATAR = 'social_network/profile/UPDATE_AVATAR';
+const TOGGLE_EDIT_MODE = 'social_network/profile/TOGGLE_EDIT_MODE';
 
 const initialState = {
   posts: [

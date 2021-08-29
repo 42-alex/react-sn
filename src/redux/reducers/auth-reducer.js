@@ -1,9 +1,9 @@
 import { authApi } from '../../api/api';
 import { stopSubmit } from 'redux-form';
 
-const SET_USER_DATA = 'social_network/app/SET_USER_DATA';
-const UNSET_USER_DATA = 'social_network/app/UNSET_USER_DATA';
-const SET_CAPTCHA_URL = 'social_network/app/SET_CAPTCHA_URL';
+const SET_USER_DATA = 'social_network/auth/SET_USER_DATA';
+const UNSET_USER_DATA = 'social_network/auth/UNSET_USER_DATA';
+const SET_CAPTCHA_URL = 'social_network/auth/SET_CAPTCHA_URL';
 
 const initialState = {
   id: null,
