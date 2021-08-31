@@ -14,7 +14,7 @@ const Paginator = (props) => {
 
   const pageItems = pagesArr.map((pageNumber) => {
     return (
-      <span className={pageNumberClass(pageNumber)}
+      <span key={pageNumber} className={pageNumberClass(pageNumber)}
             onClick={() => onPageNumberClick(pageNumber)}
       >
       {pageNumber}
