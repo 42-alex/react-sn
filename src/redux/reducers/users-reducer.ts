@@ -9,7 +9,7 @@ const SET_CURRENT_PAGE = 'social_network/users/SET_CURRENT_PAGE';
 const TOGGLE_FETCHING = 'social_network/users/TOGGLE_FETCHING';
 const TOGGLE_USER_FOLLOWING_PROGRESS = 'social_network/users/TOGGLE_USER_FOLLOWING_PROGRESS';
 
-type UserType = {
+export type UserType = {
   name: string
   id: number
   uniqueUrlName: null | string
