@@ -5,28 +5,53 @@ import {
   getUsers,
   followUser,
   unFollowUser,
+  UserType,
 } from '../../redux/reducers/users-reducer';
 import Users from './Users';
 import { compose } from 'redux';
 import withAuthRedirect from '../../hoc/withAuthRedirect';
+import { AppStateType } from '../../redux/store-redux';
 
-class UsersContainer extends React.Component {
 
-  onPageNumberClick = (currentPage) => {
+type mapStatePropsType = {
+  users: Array<UserType>
+  currentPage: number
+  totalUsersCount: number
+  usersOnPage: number
+  isFetching: boolean
+  followingInProgress: Array<number>
+}
+
+type mapDispatchPropsType = {
+  setCurrentPage: (currentPage: number) => void
+  getUsers: (currentPage: number, usersOnPage: number) => void
+  followUser: (userId: number) => void
+  unFollowUser: (userId: number) => void
+}
+
+type OwnPropsType = {
+  pageTitle: string
+}
+
+
+type PropsType = mapStatePropsType & mapDispatchPropsType & OwnPropsType;
+
+class UsersContainer extends React.Component<PropsType> {
+
+  onPageNumberClick = (currentPage: number) => {
     this.props.setCurrentPage(currentPage);
     this.getUsers(currentPage);
   }
 
   getUsers = (currentPage = this.props.currentPage) => {
-    const usersOnPage= this.props.usersOnPage;
-    this.props.getUsers(currentPage, usersOnPage);
+    this.props.getUsers(currentPage, this.props.usersOnPage);
   }
 
-  followUser = (userId) => {
+  followUser = (userId: number) => {
     this.props.followUser(userId);
   }
 
-  unfollowUser = (userId) => {
+  unfollowUser = (userId: number) => {
     this.props.unFollowUser(userId);
   }
 
@@ -45,12 +70,13 @@ class UsersContainer extends React.Component {
       isFetching={this.props.isFetching}
       onPageNumberClick={this.onPageNumberClick}
       followingInProgress={this.props.followingInProgress}
+      pageTitle={this.props.pageTitle}
     />
   }
 }
 
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: AppStateType): mapStatePropsType => ({
   users: state.usersPage.users,
   currentPage: state.usersPage.currentPage,
   totalUsersCount: state.usersPage.totalUsersCount,
@@ -62,7 +88,7 @@ const mapStateToProps = (state) => ({
 
 export default compose(
   withAuthRedirect,
-  connect(
+  connect<mapStatePropsType, mapDispatchPropsType, OwnPropsType, AppStateType>(
     mapStateToProps,
     { setCurrentPage, getUsers, followUser, unFollowUser }
   ))(UsersContainer);
