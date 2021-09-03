@@ -7,8 +7,16 @@ import usersReducer from './reducers/users-reducer';
 import authReducer from './reducers/auth-reducer';
 import { reducer as formReducer } from 'redux-form';
 
+declare global {
+  interface Window {
+    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose
+  }
+}
 
-const reducers = combineReducers({
+type RootReducerType = typeof rootReducer;
+export type AppStateType = ReturnType<RootReducerType>;
+
+const rootReducer = combineReducers({
   app: appReducer,
   profilePage: profileReducer,
   dialogsPage: dialogsReducer,
@@ -20,12 +28,13 @@ const reducers = combineReducers({
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const middleware = [ ThunkMiddleware ];
 
-const store = createStore(reducers, composeEnhancers(
+const store = createStore(rootReducer, composeEnhancers(
     applyMiddleware( ...middleware )
   )
 );
 
 // todo remove it in production mode
+// @ts-ignore
 window.store = store;
 
 export default store;
