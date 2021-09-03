@@ -1,6 +1,18 @@
+import React from 'react';
+import { WrappedFieldInputProps, WrappedFieldMetaProps } from 'redux-form';
 import c from './ValidateInput.module.css';
 
-const ValidatedInput = (props) => {
+type PropsType = {
+    meta: WrappedFieldMetaProps
+    input: WrappedFieldInputProps
+    element: any   // input || textarea || select
+    type: string
+    label?: string
+    placeholder?: string
+}
+
+const ValidatedInput = (props: PropsType) => {
+    debugger;
   const { touched, error } = props.meta;
   const { input, type, label, placeholder } = props;
   const hasError = touched && error;
