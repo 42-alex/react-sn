@@ -1,13 +1,21 @@
+import React from 'react';
 import cn from 'classnames';
 import c from './Paginator.module.css';
 
-const Paginator = (props) => {
-  const { currentPage, usersOnPage, totalUsersCount, onPageNumberClick } = props;
-  const pagesCount = Math.ceil(totalUsersCount / usersOnPage);
+type PaginatorPropsType = {
+  currentPage: number
+  itemsOnPage: number
+  totalUsersCount: number
+  onPageNumberClick: (pageNumber: number) => void
+}
+
+const Paginator: React.FC<PaginatorPropsType> = (props) => {
+  const { currentPage, itemsOnPage, totalUsersCount, onPageNumberClick } = props;
+  const pagesCount = Math.ceil(totalUsersCount / itemsOnPage);
   const pagesArr = [currentPage-2, currentPage-1, currentPage, currentPage+1, currentPage+2]
     .filter((pageNumber) => pageNumber > 0)
     .filter((pageNumber) => pageNumber <= pagesCount);
-  const pageNumberClass = pageNumber => cn(
+  const pageNumberClass = (pageNumber: number) => cn(
     c.pageNumber,
     { [c.selectedPage]: pageNumber === currentPage }
   )
