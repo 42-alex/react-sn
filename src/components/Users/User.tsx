@@ -1,10 +1,18 @@
+import React from 'react';
 import { NavLink } from 'react-router-dom';
 import defaultAvatar from '../../assets/images/avatar.jpg';
 import { DEFAULT_USER_CITY, DEFAULT_USER_CONTRY, DEFAULT_USER_STATUS } from '../../const/settings';
 import classes from './User.module.css';
+import { UserType } from '../../redux/reducers/users-reducer';
 
+type PropsType = {
+    user: UserType
+    followingInProgress: Array<number>
+    followUser: (userId: number) => void
+    unfollowUser: (userId: number) => void
+}
 
-const User = ({user, followingInProgress, followUser, unfollowUser}) => {
+const User: React.FC<PropsType> = ({ user, followingInProgress, followUser, unfollowUser }) => {
   return (
     <div key={user.id} className={classes.userItem}>
       <div className={classes.userAvatar}>
