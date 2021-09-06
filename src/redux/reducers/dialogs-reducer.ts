@@ -28,15 +28,10 @@ const initialState = {
 
 type StateType = typeof initialState;
 
-export type ActionType = {
-  type: typeof ADD_MESSAGE
-  payload: {
-    newMessageId: string
-    newMessageText: string
-  }
-}
+export type ActionsType =
+  | SetNewMessageInStoreActionType;
 
-const dialogsReducer = (state = initialState, action: ActionType): StateType => {
+const dialogsReducer = (state = initialState, action: ActionsType): StateType => {
 
   switch (action.type) {
     case ADD_MESSAGE:
@@ -52,7 +47,14 @@ const dialogsReducer = (state = initialState, action: ActionType): StateType => 
   }
 }
 
-export const setNewMessageInStore = (newMessageText: string): ActionType => {
+type SetNewMessageInStoreActionType = {
+  type: typeof ADD_MESSAGE
+  payload: {
+    newMessageId: string
+    newMessageText: string
+  }
+}
+export const setNewMessageInStore = (newMessageText: string): SetNewMessageInStoreActionType => {
   const newMessageId = uuidv4();
   return {
     type: ADD_MESSAGE,

@@ -2,6 +2,8 @@ import { profileApi } from '../../api/api';
 import { v4 as uuidv4 } from 'uuid';
 import { stopSubmit } from 'redux-form';
 import { PhotosType } from '../../types/types';
+import { ThunkAction } from 'redux-thunk';
+import { AppStateType } from '../store-redux';
 
 
 const ADD_POST = 'social_network/profile/ADD_POST';
@@ -33,10 +35,12 @@ type UserProfileType = {
   lookingForAJobDescription: string | null
   fullName: string | null
   userId: number
-  status: string | null
+  status?: string | null
   contacts: ContactsType
-  photos: PhotosType
+  photos?: PhotosType
 }
+// todo: if UserProfileType.status and UserProfileType.photos are required then the error occurred
+// in reducers case "SET_USER_PROFILE"
 
 const initialState = {
   posts: [
@@ -50,7 +54,14 @@ const initialState = {
 
 type StateType = typeof initialState;
 
-const profileReducer = (state = initialState, action: any): StateType => {
+type ActionsType =
+  | SetNewPostInStoreActionType
+  | SetUserProfileSuccessActionType
+  | SetUserStatusSuccessActionType
+  | UpdateAvatarSuccessActionType
+  | ToggleProfileEditModeActionType
+
+const profileReducer = (state = initialState, action: ActionsType): StateType => {
 
   switch (action.type) {
     case ADD_POST:
@@ -132,21 +143,22 @@ type ToggleProfileEditModeActionType = {
 }
 export const toggleProfileEditMode = (): ToggleProfileEditModeActionType => ({ type: TOGGLE_EDIT_MODE })
 
-export const getUserProfile = (profileId: number) => async (dispatch: any) => {
+type ThunkType = ThunkAction<Promise<void>, AppStateType, null, ActionsType>
+export const getUserProfile = (profileId: number): ThunkType => async (dispatch) => {
   const getProfileResponse = await profileApi.getProfile(profileId);
   dispatch(setUserProfileSuccess(getProfileResponse.data));
   const getProfileStatusResponse = await profileApi.getProfileStatus(getProfileResponse.data.userId);
   dispatch(setUserStatusSuccess(getProfileStatusResponse.data));
 }
 
-export const setUserStatus = (statusText: string) => async (dispatch: any) => {
+export const setUserStatus = (statusText: string): ThunkType => async (dispatch) => {
   const setProfileStatusResponse = await profileApi.setProfileStatus(statusText)
   if (setProfileStatusResponse.data.resultCode === 0) {
     dispatch(setUserStatusSuccess(statusText));
   }
 }
 
-export const updateAvatar = (avatarFile: any) => async (dispatch: any) => {
+export const updateAvatar = (avatarFile: any): ThunkType => async (dispatch) => {
   const updateAvatarResponse = await profileApi.updateAvatar(avatarFile)
   if (updateAvatarResponse.data.resultCode === 0) {
     dispatch(updateAvatarSuccess(updateAvatarResponse.data.data.photos));
@@ -162,7 +174,7 @@ type ProfileDataType = {
   contacts: ContactsType
 }
 
-export const setProfileData = (profileData: ProfileDataType) => async (dispatch: any) => {
+export const setProfileData = (profileData: ProfileDataType): ThunkType => async (dispatch) => {
   const setProfileDataResponse = await profileApi.setProfileData(profileData)
   if (setProfileDataResponse.data.resultCode === 0) {
     dispatch(setUserProfileSuccess(profileData));

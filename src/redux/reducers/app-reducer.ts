@@ -1,13 +1,14 @@
+import { ThunkAction } from 'redux-thunk';
 import { authMe } from './auth-reducer';
+import { AppStateType } from '../store-redux';
 
 
 const SET_APP_INITIALIZATION = 'social_network/app/SET_APP_INITIALIZATION';
 const SET_GLOBAL_ERROR = 'social_network/app/SET_GLOBAL_ERROR';
 
-type ActionType = {
-  type: typeof SET_APP_INITIALIZATION | typeof SET_GLOBAL_ERROR
-  globalErrorMessage?: string
-}
+type ActionsType =
+  | SetAppInitializationActionType
+  | SetGlobalErrorActionType
 
 export type StateType = {
   initialized: boolean
@@ -19,7 +20,7 @@ const initialState: StateType = {
   globalErrorMessage: '',
 }
 
-const appReducer = (state = initialState, action: ActionType): StateType => {
+const appReducer = (state = initialState, action: ActionsType): StateType => {
   switch(action.type) {
     case SET_APP_INITIALIZATION:
       return { ...state, initialized: true, }
@@ -30,21 +31,27 @@ const appReducer = (state = initialState, action: ActionType): StateType => {
   }
 }
 
-export const setAppInitialization = (): ActionType => ({
+type SetAppInitializationActionType = {
+  type: typeof SET_APP_INITIALIZATION
+}
+export const setAppInitialization = (): SetAppInitializationActionType => ({
   type: SET_APP_INITIALIZATION,
 })
 
-export const setGlobalError = (globalErrorMessage: string): ActionType => ({
+type SetGlobalErrorActionType = {
+  type: typeof SET_GLOBAL_ERROR
+  globalErrorMessage: string
+}
+export const setGlobalError = (globalErrorMessage: string): SetGlobalErrorActionType => ({
   type: SET_GLOBAL_ERROR,
   globalErrorMessage
 })
 
-export const initializeApp = () => (dispatch: any) => {
-  const authMePromise = dispatch(authMe());
-  Promise.all([authMePromise])
-    .then(() => {
-      dispatch(setAppInitialization());
-    })
+type ThunkType = ThunkAction<Promise<void>, AppStateType, null, ActionsType>
+
+export const initializeApp = (): ThunkType => async (dispatch) => {
+  await dispatch(authMe());
+  dispatch(setAppInitialization());
 }
 
 export default appReducer;
