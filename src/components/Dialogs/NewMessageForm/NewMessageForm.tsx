@@ -1,9 +1,13 @@
 import { Field, reduxForm } from 'redux-form';
 import ValidatedInput from '../../common/ValidatedInput/ValidatedInput';
 import { maxLength10, required } from '../../../utils/validators';
+import { FormEventHandler } from 'react';
 
+type PropsType = {
+  handleSubmit: FormEventHandler<HTMLFormElement>
+}
 
-const NewMessageForm = ({handleSubmit}) => {
+const NewMessageForm = ({handleSubmit}: PropsType) => {
   return <form onSubmit={handleSubmit}>
     <Field
       element="textarea"

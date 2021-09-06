@@ -2,8 +2,16 @@ import DialogItem from './DialogItem/DialogItem';
 import Message from './Message/Message';
 import NewMessageForm from './NewMessageForm/NewMessageForm';
 import classes from './Dialogs.module.css';
+import { DialogType, MessageType } from '../../redux/reducers/dialogs-reducer';
 
-const Dialogs = (props) => {
+
+type PropsType = {
+    dialogs: Array<DialogType>
+    messages: Array<MessageType>
+    setNewMessageInStore: (newMessageText: string) => void
+}
+
+const Dialogs = (props: PropsType) => {
   const dialogsElements = props.dialogs.map(el =>
     <DialogItem key={el.id} id={el.id} name={el.name} />
   );
@@ -11,7 +19,7 @@ const Dialogs = (props) => {
     <Message key={el.id} message={el.message} />
   )
 
-  const onFormSubmit = (formData) => {
+  const onFormSubmit = (formData: any) => {
     props.setNewMessageInStore(formData.newMessageText);
   }
 

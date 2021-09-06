@@ -2,12 +2,12 @@ import { v4 as uuidv4 } from 'uuid';
 
 const ADD_MESSAGE = 'social_network/dialogs/ADD_MESSAGE';
 
-type DialogType = {
+export type DialogType = {
   id: number | string  // uuidv4 returns string type
   name: string
 }
 
-type MessageType = {
+export type MessageType = {
   id: number | string  // uuidv4 returns string type
   message: string
 }
@@ -28,7 +28,7 @@ const initialState = {
 
 type StateType = typeof initialState;
 
-type ActionType = {
+export type ActionType = {
   type: typeof ADD_MESSAGE
   payload: {
     newMessageId: string
