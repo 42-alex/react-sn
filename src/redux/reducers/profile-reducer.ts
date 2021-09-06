@@ -145,23 +145,23 @@ export const toggleProfileEditMode = (): ToggleProfileEditModeActionType => ({ t
 
 type ThunkType = ThunkAction<Promise<void>, AppStateType, null, ActionsType>
 export const getUserProfile = (profileId: number): ThunkType => async (dispatch) => {
-  const getProfileResponse = await profileApi.getProfile(profileId);
-  dispatch(setUserProfileSuccess(getProfileResponse.data));
-  const getProfileStatusResponse = await profileApi.getProfileStatus(getProfileResponse.data.userId);
-  dispatch(setUserStatusSuccess(getProfileStatusResponse.data));
+  const responseDataProfile = await profileApi.getProfile(profileId);
+  dispatch(setUserProfileSuccess(responseDataProfile));
+  const responseDataProfileStatus = await profileApi.getProfileStatus(responseDataProfile.userId);
+  dispatch(setUserStatusSuccess(responseDataProfileStatus));
 }
 
 export const setUserStatus = (statusText: string): ThunkType => async (dispatch) => {
-  const setProfileStatusResponse = await profileApi.setProfileStatus(statusText)
-  if (setProfileStatusResponse.data.resultCode === 0) {
+  const responseData = await profileApi.setProfileStatus(statusText)
+  if (responseData.resultCode === 0) {
     dispatch(setUserStatusSuccess(statusText));
   }
 }
 
 export const updateAvatar = (avatarFile: any): ThunkType => async (dispatch) => {
-  const updateAvatarResponse = await profileApi.updateAvatar(avatarFile)
-  if (updateAvatarResponse.data.resultCode === 0) {
-    dispatch(updateAvatarSuccess(updateAvatarResponse.data.data.photos));
+  const responseData = await profileApi.updateAvatar(avatarFile)
+  if (responseData.resultCode === 0) {
+    dispatch(updateAvatarSuccess(responseData.data.photos));
   }
 }
 
@@ -175,13 +175,13 @@ export type ProfileDataType = {
 }
 
 export const setProfileData = (profileData: ProfileDataType): ThunkType => async (dispatch) => {
-  const setProfileDataResponse = await profileApi.setProfileData(profileData)
-  if (setProfileDataResponse.data.resultCode === 0) {
+  const responseData = await profileApi.setProfileData(profileData)
+  if (responseData.resultCode === 0) {
     dispatch(setUserProfileSuccess(profileData));
     dispatch(toggleProfileEditMode());
   } else {
-    const message = setProfileDataResponse.data.messages.length
-        ? setProfileDataResponse.data.messages[0]
+    const message = responseData.messages.length
+        ? responseData.messages[0]
         : 'Server error';
     dispatch(stopSubmit('profileForm', {'_error': message}))
   }

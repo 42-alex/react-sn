@@ -65,9 +65,9 @@ export const setCaptchaUrl = (captchaUrl: string): setCaptchaUrlActionType => ({
 
 type ThunkType = ThunkAction<Promise<void>, AppStateType, null, ActionsType>
 export const authMe = (): ThunkType => async (dispatch) => {
-  const authMeResponse = await authApi.authMe();
-  if (authMeResponse.data.resultCode === 0) {
-    const { id, login, email } = authMeResponse.data.data;
+  const responseData = await authApi.authMe();
+  if (responseData.resultCode === 0) {
+    const { id, login, email } = responseData.data;
     dispatch(setUserData(id, login, email));
   } else {
     dispatch(unsetUserData());
@@ -75,8 +75,8 @@ export const authMe = (): ThunkType => async (dispatch) => {
 }
 
 export const getCaptchaUrl = (): ThunkType => async (dispatch) => {
-  const captchaUrlResponse = await authApi.getCaptchaUrl();
-  dispatch(setCaptchaUrl(captchaUrlResponse.data.url))
+  const responseData = await authApi.getCaptchaUrl();
+  dispatch(setCaptchaUrl(responseData.url))
 }
 
 export type LoginDataType = {
@@ -87,22 +87,22 @@ export type LoginDataType = {
 }
 
 export const login = (loginData: LoginDataType): ThunkType => async (dispatch) => {
-  const loginResponse = await authApi.login(loginData);
-  const resultCode = loginResponse.data.resultCode;
+  const responseData = await authApi.login(loginData);
+  const resultCode = responseData.resultCode;
   if (resultCode === 0) {
     await dispatch(authMe());
   } else {
     if(resultCode === 10) {
       await dispatch(getCaptchaUrl());
     }
-    const message = loginResponse.data.messages.length ? loginResponse.data.messages[0] : 'Server error';
+    const message = responseData.messages.length ? responseData.messages[0] : 'Server error';
     dispatch(stopSubmit('loginForm', { _error: message }))
   }
 }
 
 export const logout = (): ThunkType => async (dispatch) => {
-  const logoutResponse = await authApi.logout();
-  if (logoutResponse.data.resultCode === 0) {
+  const responseData = await authApi.logout();
+  if (responseData.resultCode === 0) {
     await dispatch(authMe());
   }
 }

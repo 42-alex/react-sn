@@ -156,8 +156,8 @@ export const getUsers =
     (currentPage: number, usersOnPage: number): ThunkType =>
         async (dispatch) => {
           dispatch(toggleFetching(true));
-          const getUsersResponse = await usersApi.getUsers(currentPage, usersOnPage);
-          dispatch(setUsers(getUsersResponse.data.items, getUsersResponse.data.totalCount));
+          const responseData = await usersApi.getUsers(currentPage, usersOnPage);
+          dispatch(setUsers(responseData.items, responseData.totalCount));
           dispatch(toggleFetching(false));
         }
 
@@ -165,8 +165,8 @@ export const followUser = (userId: number): ThunkType =>
     async (dispatch) => {
       dispatch(toggleFetching(true));
       dispatch(toggleUserFollowingProgress(true, userId));
-      const followUserResponse = await usersApi.followUser(userId);
-      if (followUserResponse.data.resultCode === 0) {
+      const responseData = await usersApi.followUser(userId);
+      if (responseData.resultCode === 0) {
         dispatch(followUserSuccess(userId));
         dispatch(toggleFetching(false));
         dispatch(toggleUserFollowingProgress(false, userId));
@@ -177,8 +177,8 @@ export const unFollowUser = (userId: number): ThunkType =>
     async (dispatch) => {
       dispatch(toggleFetching(true));
       dispatch(toggleUserFollowingProgress(true, userId));
-      const unfollowUserResponse = await usersApi.unfollowUser(userId);
-      if (unfollowUserResponse.data.resultCode === 0) {
+      const responseData = await usersApi.unfollowUser(userId);
+      if (responseData.resultCode === 0) {
         dispatch(unfollowUserSuccess(userId));
         dispatch(toggleFetching(false));
         dispatch(toggleUserFollowingProgress(false, userId));

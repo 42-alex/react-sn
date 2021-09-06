@@ -25,17 +25,20 @@ type GetUsersResponseType = {
 };
 
 const usersApi = {
-  getUsers(currentPage = 1, usersOnPage = 3) {
-    return axiosInstance
+  async getUsers(currentPage = 1, usersOnPage = 3) {
+    const response = await axiosInstance
       .get<GetUsersResponseType>(`users?page=${currentPage}&count=${usersOnPage}`)
+    return response.data;
   },
-  followUser(userId: number) {
-    return axiosInstance
+  async followUser(userId: number) {
+    const response = await axiosInstance
       .post<CommonResponseType>(`follow/${userId}`)
+    return response.data;
   },
-  unfollowUser(userId: number) {
-    return axiosInstance
+  async unfollowUser(userId: number) {
+    const response = await axiosInstance
       .delete<CommonResponseType>(`follow/${userId}`)
+    return response.data;
   },
 }
 
@@ -54,17 +57,21 @@ type GetCaptchaUrlResponseType = {
 }
 
 const authApi = {
-  authMe() {
-    return axiosInstance.get<AuthMeResponseType>('auth/me');
+  async authMe() {
+    const response = await axiosInstance.get<AuthMeResponseType>('auth/me');
+    return response.data;
   },
-  login(loginData: LoginDataType) {
-    return axiosInstance.post<LoginResponseType>('auth/login', { ...loginData });
+  async login(loginData: LoginDataType) {
+    const response = await axiosInstance.post<LoginResponseType>('auth/login', { ...loginData });
+    return response.data;
   },
-  logout() {
-    return axiosInstance.delete<CommonResponseType>('auth/login');
+  async logout() {
+    const response = await axiosInstance.delete<CommonResponseType>('auth/login');
+    return response.data;
   },
-  getCaptchaUrl() {
-    return axiosInstance.get<GetCaptchaUrlResponseType>('security/get-captcha-url');
+  async getCaptchaUrl() {
+    const response = await axiosInstance.get<GetCaptchaUrlResponseType>('security/get-captcha-url');
+    return response.data;
   },
 }
 
@@ -78,26 +85,31 @@ type UpdateAvatarResponseType = {
 }
 
 const profileApi = {
-  getProfile(profileId: number) {
-    return axiosInstance.get<UserProfileType>(`profile/${profileId}`);
+  async getProfile(profileId: number) {
+    const response = await axiosInstance.get<UserProfileType>(`profile/${profileId}`);
+    return response.data;
   },
-  getProfileStatus(userId: number) {
-    return axiosInstance.get<GetProfileStatusResponseType>(`profile/status/${userId}`);
+  async getProfileStatus(userId: number) {
+    const response = await axiosInstance.get<GetProfileStatusResponseType>(`profile/status/${userId}`);
+    return response.data;
   },
-  setProfileStatus(statusText: string) {
-    return axiosInstance.put<CommonResponseType>(`profile/status`, { status: statusText });
+  async setProfileStatus(statusText: string) {
+    const response = await axiosInstance.put<CommonResponseType>(`profile/status`, { status: statusText });
+    return response.data;
   },
-  updateAvatar(avatarFile: any) {  // todo: replace with right type
+  async updateAvatar(avatarFile: any) {  // todo: replace with right type
     let data = new FormData();
     data.append('image', avatarFile);
-    return axiosInstance.put<UpdateAvatarResponseType>(`profile/photo`, data, {
+    const response = await axiosInstance.put<UpdateAvatarResponseType>(`profile/photo`, data, {
       headers: {
         'Content-Type': `multipart/form-data`,
       }
     });
+    return response.data;
   },
-  setProfileData(profileData: ProfileDataType) {
-    return axiosInstance.put<CommonResponseType>(`profile/`, profileData);
+  async setProfileData(profileData: ProfileDataType) {
+    const response = await axiosInstance.put<CommonResponseType>(`profile/`, profileData);
+    return response.data;
   },
 }
 
