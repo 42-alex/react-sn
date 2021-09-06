@@ -29,7 +29,7 @@ type ContactsType = {
   mainLink: string | null
 }
 
-type UserProfileType = {
+export type UserProfileType = {
   aboutMe: string | null
   lookingForAJob: boolean
   lookingForAJobDescription: string | null
@@ -165,7 +165,7 @@ export const updateAvatar = (avatarFile: any): ThunkType => async (dispatch) => 
   }
 }
 
-type ProfileDataType = {
+export type ProfileDataType = {
   aboutMe: string | null
   lookingForAJob: boolean
   lookingForAJobDescription: string | null

@@ -79,7 +79,7 @@ export const getCaptchaUrl = (): ThunkType => async (dispatch) => {
   dispatch(setCaptchaUrl(captchaUrlResponse.data.url))
 }
 
-type LoginDataType = {
+export type LoginDataType = {
   email: string
   password: string
   rememberMe: boolean
